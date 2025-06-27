@@ -3,10 +3,12 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:32:14
  * @LastEditors: lyf
- * @LastEditTime: 2025-06-20 16:32:36
+ * @LastEditTime: 2025-06-25 16:49:42
  * @FilePath: \v3-admin-lowcode\src\libs\utils\request.ts
  */
 import axios from 'axios'
+import { useAuthStore } from '@/stores/auth'
+import router from '@/router'
 
 const request = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -17,6 +19,15 @@ const request = axios.create({
 request.interceptors.request.use(
   function (config) {
     // 请求前处理逻辑
+    // 验证 token
+    const token = useAuthStore().getToken()
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    } else {
+      // 跳转登录
+      router.push('/login')
+    }
+
     return config
   },
   function (error) {
