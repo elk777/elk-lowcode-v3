@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
-    "@vicons/antd": "^0.13.0",
     "axios": "^1.10.0",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.3.0",
@@ -24,9 +23,14 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@mswjs/data": "^0.16.2",
     "@tsconfig/node22": "^22.0.1",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.14.0",
+    "@vicons/antd": "^0.13.0",
+    "@vicons/fa": "^0.13.0",
+    "@vicons/fluent": "^0.13.0",
+    "@vicons/ionicons5": "^0.13.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vitest/eslint-plugin": "^1.1.39",
     "@vue/eslint-config-prettier": "^10.2.0",
@@ -37,6 +41,7 @@
     "eslint-plugin-vue": "~10.0.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.0.0",
+    "msw": "^2.10.3",
     "naive-ui": "^2.42.0",
     "npm-run-all2": "^7.0.2",
     "prettier": "3.5.3",
@@ -45,5 +50,10 @@
     "vite-plugin-vue-devtools": "^7.7.2",
     "vitest": "^3.1.1",
     "vue-tsc": "^2.2.8"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

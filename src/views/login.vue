@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
  * @LastEditors: lyf
- * @LastEditTime: 2025-06-25 14:45:10
+ * @LastEditTime: 2025-07-11 15:25:31
  * @FilePath: \v3-admin-lowcode\src\views\login.vue
 -->
 <template>
@@ -83,6 +83,10 @@ import type { FormInst, FormRules, FormItemRule } from 'naive-ui'
 import { NForm, NFormItem, NInput, NButton, NCheckbox, NIcon } from 'naive-ui'
 import { UserOutlined, LockOutlined } from '@vicons/antd'
 import { useMessage } from 'naive-ui'
+import { useAuthStore } from '@/stores/auth'
+import { PermissionConstant } from '@/constants/permission.util.constant'
+
+import { login } from '@/apis/login'
 
 const message = useMessage()
 
@@ -134,13 +138,9 @@ const handleLogin = async (): Promise<void> => {
   try {
     loading.value = true
     await formRef.value.validate()
-
     // 这里添加登录逻辑
     // 可以调用API接口进行身份验证
-    setTimeout(() => {
-      router.push('/index')
-      message.success('登录成功')
-    }, 1000)
+    const res = await login(formData)
   } catch (err: unknown) {
     console.error('登录验证失败:', err)
   } finally {
