@@ -7,7 +7,7 @@
  * @FilePath: \v3-admin-lowcode\src\apis\routers.ts
  */
 
-import { request } from '@/libs/utils/request'
+import request from '@/libs/utils/request'
 
 export const getRouters = () => {
   return request({

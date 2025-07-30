@@ -8,6 +8,6 @@
  */
 
 import { ColorFilterSharp } from '@vicons/ionicons5'
-import { DashboardOutlined } from '@vicons/antd'
+import { DashboardOutlined, UserOutlined, LockOutlined } from '@vicons/antd'
 
-export { ColorFilterSharp, DashboardOutlined }
+export { ColorFilterSharp, DashboardOutlined, UserOutlined, LockOutlined }

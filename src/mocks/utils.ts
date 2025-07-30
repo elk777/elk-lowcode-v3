@@ -17,7 +17,7 @@ export const getBasePath = () => {
 
 // 获取mock地址和base
 export const getMockUrl = (url: string) => {
-  return getBasePath() + url
+  return import.meta.env.VITE_API_URL + getBasePath() + url
 }
 
 // 返回数据格式

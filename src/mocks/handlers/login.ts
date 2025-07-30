@@ -3,23 +3,30 @@
  * @Autor: lyf
  * @Date: 2025-07-07 15:56:21
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-08 14:51:20
- * @FilePath: \v3-admin-lowcode\src\mocks\handlers.ts
+ * @LastEditTime: 2025-07-16 16:45:45
+ * @FilePath: \v3-admin-lowcode\src\mocks\handlers\login.ts
  */
 import { http } from 'msw'
-import { userDB } from '../mockData/index'
 import { getMockUrl, setResponse } from '../utils'
+import { PermissionConstant } from '@/constants/permission.util.constant'
+import { userDB } from '../mockData/index'
 
-export const users = [
-  // 示例: GET 请求处理
-  http.get(getMockUrl('/login'), ({ request }) => {
-    console.log('🚀 ~ http.get ~ request:', request)
-    // const url = new URL(request.url)
-    // 获取查询参数
-    // const page = url.searchParams.get('page') || '1'
-
+export const logins = [
+  // 登录接口拦截
+  http.post(getMockUrl('/login'), ({}) => {
     // 生成响应数据
-    return setResponse(200, userDB.user.getAll(), '登录成功')
+    return setResponse(200, PermissionConstant.TOKEN, '登录成功')
+  }),
+  // 登出接口拦截
+  http.post(getMockUrl('/logout'), ({}) => {
+    // 返回响应数据
+    return setResponse(200, null, '登出成功')
+  }),
+  // 获取用户信息接口拦截
+  http.get(getMockUrl('/getUserInfo'), ({}) => {
+    // 获取用户信息
+    const userInfo = userDB.user.getAll()[0]
+    return setResponse(200, userInfo, '获取用户信息成功')
   }),
 
   // 可以添加更多处理器...

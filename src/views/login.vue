@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-11 15:25:31
+ * @LastEditTime: 2025-07-15 17:16:27
  * @FilePath: \v3-admin-lowcode\src\views\login.vue
 -->
 <template>
@@ -81,10 +81,9 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import type { FormInst, FormRules, FormItemRule } from 'naive-ui'
 import { NForm, NFormItem, NInput, NButton, NCheckbox, NIcon } from 'naive-ui'
-import { UserOutlined, LockOutlined } from '@vicons/antd'
+import { UserOutlined, LockOutlined } from '@/libs/utils/icons'
 import { useMessage } from 'naive-ui'
 import { useAuthStore } from '@/stores/auth'
-import { PermissionConstant } from '@/constants/permission.util.constant'
 
 import { login } from '@/apis/login'
 
@@ -139,8 +138,12 @@ const handleLogin = async (): Promise<void> => {
     loading.value = true
     await formRef.value.validate()
     // 这里添加登录逻辑
+    const authStore = useAuthStore()
     // 可以调用API接口进行身份验证
-    const res = await login(formData)
+    const res = await authStore.Login(formData)
+    if (res.code === 200) {
+      router.push('/')
+    }
   } catch (err: unknown) {
     console.error('登录验证失败:', err)
   } finally {

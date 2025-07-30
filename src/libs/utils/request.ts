@@ -3,13 +3,14 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:32:14
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-07 15:22:22
+ * @LastEditTime: 2025-07-14 16:29:33
  * @FilePath: \v3-admin-lowcode\src\libs\utils\request.ts
  */
 import axios from 'axios'
+import { getBasePath } from '@/mocks/utils'
 
 const request = axios.create({
-  baseURL: import.meta.env.VITE_API_URL + import.meta.env.VITE_BASE_API,
+  baseURL: import.meta.env.VITE_API_URL + getBasePath(),
   timeout: import.meta.env.VITE_API_TIMEOUT,
 })
 
