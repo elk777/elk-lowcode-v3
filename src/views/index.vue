@@ -3,14 +3,14 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:06
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-04 09:06:39
+ * @LastEditTime: 2025-08-15 15:46:52
  * @FilePath: \v3-admin-lowcode\src\views\index.vue
 -->
 <template>
   <div class="app-con">
     <div class="w-22 h-22 border-4 bg-[#785947]">Index</div>
     <n-space>
-      <n-button class="w-22 h-22">Default</n-button>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
       <n-button type="tertiary"> Tertiary </n-button>
       <n-button type="primary"> Primary </n-button>
       <n-button type="info"> Info </n-button>
@@ -25,9 +25,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { NButton, NSpace } from 'naive-ui'
+import { useAuthStore } from '@/stores/auth'
 // import { useCounterStore } from '@/stores/counter'
 
 // const counterStore = useCounterStore()
+
+const authStore = useAuthStore()
+const handleLogout = async () => {
+  // 登出
+  await authStore.LoginOut()
+  location.href = '/index'
+}
 
 const count = ref<number>(10)
 

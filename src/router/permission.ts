@@ -3,11 +3,13 @@
  * @Autor: lyf
  * @Date: 2025-07-07 14:51:00
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-30 14:41:44
+ * @LastEditTime: 2025-08-15 16:31:51
  * @FilePath: \v3-admin-lowcode\src\router\permission.ts
  */
 import router from '@/router'
 import { useAuthStore } from '@/stores/auth'
+import { createDiscreteApi } from 'naive-ui'
+const { loadingBar } = createDiscreteApi(['loadingBar'])
 /* 
     路由权限的控制
     1.开启全局前置守卫
@@ -24,19 +26,29 @@ import { useAuthStore } from '@/stores/auth'
 
 const whiteList = ['/login'] // 白名单
 
-router.beforeEach((to, form, next) => {
+router.beforeEach(async (to, form, next) => {
+  loadingBar.start()
   // 进行token验证，跳转登录
   const token = useAuthStore().getToken(),
     roles = useAuthStore().roles
+  console.log('🚀 ~ roles:', roles)
   console.log('🚀 ~ router.beforeEach ~ token:', token)
   if (token) {
     if (to.path === '/login') {
       next({ path: '/' })
+      loadingBar.finish()
     } else {
-      if(roles.length === 0) {
+      if (roles.length === 0) {
         try {
           await useAuthStore().GetUserInfo()
+          next()
+        } catch (err) {
+          console.log('🚀 ~ err:', err)
+          await useAuthStore().LoginOut()
+          next('/login')
         }
+      } else {
+        next()
       }
     }
   } else {
@@ -44,6 +56,7 @@ router.beforeEach((to, form, next) => {
       next()
     } else {
       next('/login')
+      loadingBar.finish()
     }
   }
   // if (!token && to.path !== '/login') {
@@ -51,4 +64,8 @@ router.beforeEach((to, form, next) => {
   // } else {
   //   next()
   // }
+})
+
+router.afterEach(() => {
+  loadingBar.finish()
 })

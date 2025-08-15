@@ -9,8 +9,9 @@
 
 import { defineStore } from 'pinia'
 import { login, loginOut, getUserInfo } from '@/apis/login'
-import type { ILoginParams } from '@/interfaces/login'
+import type { ILoginParams, IUserInfo } from '@/interfaces/login'
 import type { IResponse } from '@/interfaces/response'
+
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -31,7 +32,7 @@ export const useAuthStore = defineStore('auth', {
     resetToken() {
       this.token = ''
     },
-    setUserInfo(userInfo: object) {
+    setUserInfo(userInfo: IUserInfo) {
       this.name = userInfo.name
       this.avatar = userInfo.avatar
       this.roles = userInfo.roles

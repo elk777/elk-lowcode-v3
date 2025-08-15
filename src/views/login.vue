@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-15 17:16:27
+ * @LastEditTime: 2025-08-15 17:10:08
  * @FilePath: \v3-admin-lowcode\src\views\login.vue
 -->
 <template>
@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
 import type { FormInst, FormRules, FormItemRule } from 'naive-ui'
 import { NForm, NFormItem, NInput, NButton, NCheckbox, NIcon } from 'naive-ui'
@@ -88,6 +88,7 @@ import { useAuthStore } from '@/stores/auth'
 import { login } from '@/apis/login'
 
 const message = useMessage()
+const { proxy } = getCurrentInstance()
 
 // 定义表单数据接口
 interface LoginFormData {
@@ -142,6 +143,7 @@ const handleLogin = async (): Promise<void> => {
     // 可以调用API接口进行身份验证
     const res = await authStore.Login(formData)
     if (res.code === 200) {
+      // proxy.$message.success('登录成功')
       router.push('/')
     }
   } catch (err: unknown) {

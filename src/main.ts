@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-08 15:20:28
+ * @LastEditTime: 2025-08-15 17:06:13
  * @FilePath: \v3-admin-lowcode\src\main.ts
  */
 // 重置样式
@@ -13,6 +13,9 @@ import { createApp } from 'vue'
 import { setupPinia } from './stores'
 import App from './App.vue'
 import router from './router'
+
+// 引入全局方法
+import NaviMessagePlugin from '@/plugins/navi-message'
 
 // Mock模式
 const enableMocks =
@@ -34,5 +37,6 @@ const app = createApp(App)
 
 setupPinia(app)
 app.use(router)
+app.use(NaviMessagePlugin)
 
 app.mount('#app')
