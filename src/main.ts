@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
  * @LastEditors: lyf
- * @LastEditTime: 2025-08-15 17:06:13
+ * @LastEditTime: 2025-10-22 16:34:08
  * @FilePath: \v3-admin-lowcode\src\main.ts
  */
 // 重置样式
@@ -16,6 +16,9 @@ import router from './router'
 
 // 引入全局方法
 import NaviMessagePlugin from '@/plugins/navi-message'
+
+// 引入uno.css
+import 'virtual:uno.css'
 
 // Mock模式
 const enableMocks =
