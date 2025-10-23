@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-09 14:38:42
+ * @LastEditTime: 2025-10-23 17:13:37
  * @FilePath: \v3-admin-lowcode\src\router\index.ts
  */
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
@@ -28,13 +28,13 @@ const router = createRouter({
     },
     {
       path: '',
-      redirect: '/index',
+      redirect: '/workbench',
       component: Layout,
       children: [
         {
-          path: '/index',
-          name: 'index',
-          component: () => import('@/views/index.vue'),
+          path: '/workbench',
+          name: 'workbench',
+          component: () => import('@/views/workbench.vue'),
           meta: {
             title: '首页',
             icon: 'home',

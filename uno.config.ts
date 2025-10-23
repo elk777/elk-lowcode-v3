@@ -14,7 +14,7 @@ export default defineConfig({
     // 静态规则
     ['bg-red', { backgroundColor: 'red' }],
     ['m-10', { margin: '10px' }],
-    // 动态
+    // 动态规则
     [
       /^mx-(\d+)$/,
       (match) => ({ 'margin-left': `${match[1]}px`, 'margin-right': `${match[1]}px` }),

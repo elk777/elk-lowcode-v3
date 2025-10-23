@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
  * @LastEditors: lyf
- * @LastEditTime: 2025-08-15 17:10:08
+ * @LastEditTime: 2025-10-23 17:22:08
  * @FilePath: \v3-admin-lowcode\src\views\login.vue
 -->
 <template>
@@ -85,8 +85,7 @@ import { UserOutlined, LockOutlined } from '@/libs/utils/icons'
 import { useMessage } from 'naive-ui'
 import { useAuthStore } from '@/stores/auth'
 
-import { login } from '@/apis/login'
-
+// import { login } from '@/apis/login'
 const message = useMessage()
 const { proxy } = getCurrentInstance()
 
@@ -143,7 +142,8 @@ const handleLogin = async (): Promise<void> => {
     // 可以调用API接口进行身份验证
     const res = await authStore.Login(formData)
     if (res.code === 200) {
-      // proxy.$message.success('登录成功')
+      // message.success('登录成功')
+      proxy.$message.success('登录成功')
       router.push('/')
     }
   } catch (err: unknown) {
@@ -155,9 +155,6 @@ const handleLogin = async (): Promise<void> => {
 </script>
 
 <style>
-/* 引用 Tailwind 类 */
-/* @reference "tailwindcss"; */
-
 @keyframes float {
   0% {
     transform: translateY(0px);

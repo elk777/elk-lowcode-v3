@@ -3,11 +3,11 @@
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
  * @LastEditors: lyf
- * @LastEditTime: 2025-10-22 16:34:08
+ * @LastEditTime: 2025-10-23 14:52:07
  * @FilePath: \v3-admin-lowcode\src\main.ts
  */
 // 重置样式
-import './style/tailwind.css'
+import './style/reset.css'
 
 import { createApp } from 'vue'
 import { setupPinia } from './stores'
