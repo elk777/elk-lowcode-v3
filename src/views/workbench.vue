@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:06
  * @LastEditors: lyf
- * @LastEditTime: 2025-10-24 16:26:00
+ * @LastEditTime: 2025-10-27 15:35:47
  * @FilePath: \v3-admin-lowcode\src\views\workbench.vue
 -->
 <template>
@@ -25,18 +25,18 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue'
 import { NButton, NSpace } from 'naive-ui'
-import { useMessage } from 'naive-ui'
 import { useAuthStore } from '@/stores/auth'
 // import { useCounterStore } from '@/stores/counter'
 
 // const counterStore = useCounterStore()
-const $message = inject('$message')
+const message = inject('$message')
+console.log('🚀 ~ message:', message)
 const authStore = useAuthStore()
 const handleLogout = async () => {
   // 登出
   await authStore.LoginOut()
   location.href = '/index'
-  $message.success('登出成功')
+  message.success('登出成功')
 }
 
 const count = ref<number>(10)

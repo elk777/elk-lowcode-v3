@@ -3,11 +3,12 @@
  * @Autor: lyf
  * @Date: 2025-07-07 14:51:00
  * @LastEditors: lyf
- * @LastEditTime: 2025-08-15 16:31:51
+ * @LastEditTime: 2025-10-28 16:13:21
  * @FilePath: \v3-admin-lowcode\src\router\permission.ts
  */
 import router from '@/router'
 import { useAuthStore } from '@/stores/auth'
+import { useRouterStore } from '@/stores/routers'
 import { createDiscreteApi } from 'naive-ui'
 const { loadingBar } = createDiscreteApi(['loadingBar'])
 /* 
@@ -31,8 +32,6 @@ router.beforeEach(async (to, form, next) => {
   // 进行token验证，跳转登录
   const token = useAuthStore().getToken(),
     roles = useAuthStore().roles
-  console.log('🚀 ~ roles:', roles)
-  console.log('🚀 ~ router.beforeEach ~ token:', token)
   if (token) {
     if (to.path === '/login') {
       next({ path: '/' })
@@ -41,6 +40,7 @@ router.beforeEach(async (to, form, next) => {
       if (roles.length === 0) {
         try {
           await useAuthStore().GetUserInfo()
+          await useRouterStore().GenerateRoutes()
           next()
         } catch (err) {
           console.log('🚀 ~ err:', err)

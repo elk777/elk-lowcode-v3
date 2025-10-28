@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-07 16:09:50
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-16 16:43:24
+ * @LastEditTime: 2025-10-28 16:08:48
  * @FilePath: \v3-admin-lowcode\src\mocks\mockData\user.ts
  */
 
@@ -27,6 +27,16 @@ export const userDB = factory({
     updatedAt: Date,
     createdAt: Date,
     avatar: String,
+  },
+  router: {
+    id: primaryKey(String),
+    name: String,
+    path: String,
+    component: String,
+    redirect: String,
+    meta: Object,
+    children: Array,
+    hidden: Boolean,
   },
 })
 
@@ -67,4 +77,42 @@ userDB.user.create({
   createdAt: '2024-07-21 13:28:33',
   updateBy: '',
   updatedAt: '',
+})
+
+userDB.router.create({
+  id: '1',
+  name: 'dashboard',
+  path: '/',
+  component: 'Layout',
+  redirect: '/workbench',
+  meta: {
+    title: '首页',
+    icon: 'dashboard',
+  },
+  children: [
+    {
+      id: '1-1',
+      name: 'workbench',
+      path: 'workbench',
+      meta: {
+        title: '工作台',
+        icon: 'workbench',
+        noCache: false,
+        link: null,
+      },
+      component: 'workbench/index',
+    },
+    {
+      id: '1-2',
+      name: 'analytics',
+      path: 'analytics',
+      meta: {
+        title: '分析页',
+        icon: 'analytics',
+        noCache: false,
+        link: null,
+      },
+      component: 'analytics/index',
+    },
+  ],
 })
