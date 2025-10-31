@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-07 14:51:00
  * @LastEditors: lyf
- * @LastEditTime: 2025-10-28 16:13:21
+ * @LastEditTime: 2025-10-29 17:12:40
  * @FilePath: \v3-admin-lowcode\src\router\permission.ts
  */
 import router from '@/router'

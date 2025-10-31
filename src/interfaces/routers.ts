@@ -1,7 +1,8 @@
 export interface IRouter {
   path: string
   name: string
-  component: () => Promise<typeof import('*.vue')>
+  component: unknown
+  redirect?: string
   meta: {
     title: string
     icon: string
