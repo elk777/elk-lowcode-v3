@@ -13,11 +13,11 @@ import { handlers } from './handlers/index'
 const worker = setupWorker(...handlers)
 
 // 导出启动函数
-export function startWorker() {
-  worker.start({
+export async function startWorker() {
+  await worker.start({
+    waitUntilReady: true,
     onUnhandledRequest: 'bypass',
   })
-
   console.log('[MSW] Mock Service Worker 已启动')
   return worker
 }

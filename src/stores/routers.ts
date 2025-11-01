@@ -2,9 +2,9 @@
  * @Description:
  * @Autor: lyf
  * @Date: 2025-10-28 16:23:42
- * @LastEditors: lyf
- * @LastEditTime: 2025-10-29 17:23:34
- * @FilePath: \v3-admin-lowcode\src\stores\routers.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-01 13:17:35
+ * @FilePath: /elk-lowcode-v3/src/stores/routers.ts
  */
 import { defineStore } from 'pinia'
 import { getRouters } from '@/apis/routers'
@@ -16,6 +16,7 @@ const { VITE_NODE_ENV } = import.meta.env
 // 过滤动态路由，将路由字符串转为路由对象
 const filterAsyncRoutes = (routes: IRouter[]) => {
   return routes.filter((route) => {
+    console.log("🚀 ~ filterAsyncRoutes ~ route:", route)
     if (route.component) {
       if (route.component === 'Layout') {
         route.component = Layout
@@ -29,7 +30,7 @@ const filterAsyncRoutes = (routes: IRouter[]) => {
     return true
   })
 }
-const loadView = (view: string) => {
+const loadView = (view: unknown) => {
   console.log('🚀 ~ loadView ~ view:', view)
   // if (VITE_NODE_ENV === 'development') {
   //   return (resolve: string) => require([`@/views/${view}`], resolve)

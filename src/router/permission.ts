@@ -2,9 +2,9 @@
  * @Description: 路由守卫配置
  * @Autor: lyf
  * @Date: 2025-07-07 14:51:00
- * @LastEditors: lyf
- * @LastEditTime: 2025-10-29 17:12:40
- * @FilePath: \v3-admin-lowcode\src\router\permission.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-01 13:29:17
+ * @FilePath: /elk-lowcode-v3/src/router/permission.ts
  */
 import router from '@/router'
 import { useAuthStore } from '@/stores/auth'
@@ -46,6 +46,7 @@ router.beforeEach(async (to, form, next) => {
           console.log('🚀 ~ err:', err)
           await useAuthStore().LoginOut()
           next('/login')
+          // next()
         }
       } else {
         next()
