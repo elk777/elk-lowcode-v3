@@ -2,15 +2,20 @@
  * @Description: 
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
- * @LastEditors: lyf
- * @LastEditTime: 2025-08-15 16:26:27
- * @FilePath: \v3-admin-lowcode\src\App.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-01 14:08:15
+ * @FilePath: /elk-lowcode-v3/src/App.vue
 -->
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import { NMessageProvider, NConfigProvider, useLoadingBar } from 'naive-ui'
 
+import { watchEffect } from 'vue'
 
+const route = useRoute()
+watchEffect(() => {
+  console.log('当前路由对象：', route)
+})
 </script>
 
 <template>
@@ -23,5 +28,4 @@ import { NMessageProvider, NConfigProvider, useLoadingBar } from 'naive-ui'
   </n-config-provider>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

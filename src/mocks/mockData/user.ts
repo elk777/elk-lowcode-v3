@@ -2,9 +2,9 @@
  * @Description: 用户数据mock
  * @Autor: lyf
  * @Date: 2025-07-07 16:09:50
- * @LastEditors: lyf
- * @LastEditTime: 2025-10-28 16:08:48
- * @FilePath: \v3-admin-lowcode\src\mocks\mockData\user.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-01 13:49:28
+ * @FilePath: /elk-lowcode-v3/src/mocks/mockData/user.ts
  */
 
 import { factory, primaryKey } from '@mswjs/data'
@@ -93,26 +93,26 @@ userDB.router.create({
     {
       id: '1-1',
       name: 'workbench',
-      path: 'workbench',
+      path: '/workbench',
       meta: {
         title: '工作台',
         icon: 'workbench',
         noCache: false,
         link: null,
       },
-      component: 'workbench/index',
+      component: 'workbench',
     },
     {
       id: '1-2',
       name: 'analytics',
-      path: 'analytics',
+      path: '/analytics',
       meta: {
         title: '分析页',
         icon: 'analytics',
         noCache: false,
         link: null,
       },
-      component: 'analytics/index',
+      component: 'analytics',
     },
   ],
 })

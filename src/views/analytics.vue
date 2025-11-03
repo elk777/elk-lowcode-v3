@@ -2,9 +2,9 @@
  * @Description: 首页-分析页-界面
  * @Autor: lyf
  * @Date: 2025-10-27 15:47:50
- * @LastEditors: lyf
- * @LastEditTime: 2025-10-27 15:49:46
- * @FilePath: \v3-admin-lowcode\src\views\analytics.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-03 18:38:29
+ * @FilePath: /elk-lowcode-v3/src/views/analytics.vue
 -->
 <template>
   <div>
@@ -13,10 +13,11 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from '@vue/composition-api'
+<script setup lang="ts">
+// import { ref } from 'vue'
 
-const feature = ref()
+// const feature = ref();
+// console.log("🚀 ~ feature:", feature)
 </script>
 
 <style scoped>

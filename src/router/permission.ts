@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-07 14:51:00
  * @LastEditors: elk 
- * @LastEditTime: 2025-11-01 13:29:17
+ * @LastEditTime: 2025-11-03 18:36:31
  * @FilePath: /elk-lowcode-v3/src/router/permission.ts
  */
 import router from '@/router'
@@ -31,7 +31,7 @@ router.beforeEach(async (to, form, next) => {
   loadingBar.start()
   // 进行token验证，跳转登录
   const token = useAuthStore().getToken(),
-    roles = useAuthStore().roles
+  roles = useAuthStore().roles
   if (token) {
     if (to.path === '/login') {
       next({ path: '/' })
@@ -41,6 +41,8 @@ router.beforeEach(async (to, form, next) => {
         try {
           await useAuthStore().GetUserInfo()
           await useRouterStore().GenerateRoutes()
+          // 添加完路由后，需要调用next({ ...to, replace: true })来重新触发路由匹配
+          // next({ ...to, replace: true })
           next()
         } catch (err) {
           console.log('🚀 ~ err:', err)

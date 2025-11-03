@@ -2,9 +2,9 @@
  * @Description: 登录页面
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
- * @LastEditors: lyf
- * @LastEditTime: 2025-10-24 15:10:47
- * @FilePath: \v3-admin-lowcode\src\views\login.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-01 14:04:06
+ * @FilePath: /elk-lowcode-v3/src/views/login.vue
 -->
 <template>
   <div
