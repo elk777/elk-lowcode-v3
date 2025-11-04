@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth', {
     userInfo: {}, // 用户基本信息
     name: '', // 用户名称
     avatar: '', // 用户头像地址
-    roles: [], // 用户所属角色列表
+    roles: ['*'], // 用户所属角色列表
     permissions: [], // 用户权限列表
   }),
   actions: {

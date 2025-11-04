@@ -2,20 +2,21 @@
  * @Description:
  * @Autor: lyf
  * @Date: 2025-10-28 16:23:42
- * @LastEditors: elk 
- * @LastEditTime: 2025-11-03 18:51:24
- * @FilePath: /elk-lowcode-v3/src/stores/routers.ts
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-04 16:56:11
+ * @FilePath: \v3-admin-lowcode\src\stores\routers.ts
  */
 import { defineStore } from 'pinia'
 import { getRouters } from '@/apis/routers'
 import router from '@/router'
+import { staticRoutes } from '@/router'
 import type { IRouter } from '@/interfaces/routers'
 import Layout from '@/layout/index.vue'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 // 过滤动态路由，将路由字符串转为路由对象
 const filterAsyncRoutes = (routes: IRouter[]) => {
   return routes.filter((route) => {
-    console.log("🚀 ~ filterAsyncRoutes ~ route:", route)
+    // console.log("🚀 ~ filterAsyncRoutes ~ route:", route)
     if (route.component) {
       if (route.component === 'Layout') {
         route.component = Layout
@@ -39,7 +40,7 @@ export const useRouterStore = defineStore('router', {
     return {
       routers: [] as IRouter[], // 路由表
       addRouters: [] as IRouter[], // 动态路由表
-      sidebarRouter: [] as RouteRecordNormalized[], // 侧边栏路由表
+      sidebarRouter: [] as RouteRecordRaw[], // 侧边栏路由表
     }
   },
   actions: {
@@ -51,7 +52,9 @@ export const useRouterStore = defineStore('router', {
         const routeRecordRaw = route as RouteRecordRaw
         router.addRoute(routeRecordRaw)
       })
-      this.sidebarRouter = router.getRoutes()
+      this.sidebarRouter = [...staticRoutes, ...this.addRouters].filter(
+        (route) => !route.hidden
+      ) as RouteRecordRaw[]
     },
     // 获取路由信息
     async GenerateRoutes() {

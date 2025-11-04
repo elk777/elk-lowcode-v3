@@ -2,17 +2,16 @@
  * @Description: 路由配置
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
- * @LastEditors: elk 
- * @LastEditTime: 2025-11-03 18:54:31
- * @FilePath: /elk-lowcode-v3/src/router/index.ts
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-04 16:12:53
+ * @FilePath: \v3-admin-lowcode\src\router\index.ts
  */
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import type { IRouter } from '@/interfaces/routers'
 const { VITE_ROUTER_MODE } = import.meta.env
 import Layout from '@/layout/index.vue'
-import { h } from 'vue'
 // 静态路由 - 非权限路由
-const staticRoutes = [
+export const staticRoutes = [
   {
     path: '/login',
     name: 'login',

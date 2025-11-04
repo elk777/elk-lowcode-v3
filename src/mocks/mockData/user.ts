@@ -2,9 +2,9 @@
  * @Description: 用户数据mock
  * @Autor: lyf
  * @Date: 2025-07-07 16:09:50
- * @LastEditors: elk 
- * @LastEditTime: 2025-11-01 13:49:28
- * @FilePath: /elk-lowcode-v3/src/mocks/mockData/user.ts
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-04 16:42:44
+ * @FilePath: \v3-admin-lowcode\src\mocks\mockData\user.ts
  */
 
 import { factory, primaryKey } from '@mswjs/data'
@@ -80,39 +80,39 @@ userDB.user.create({
 })
 
 userDB.router.create({
-  id: '1',
-  name: 'dashboard',
+  id: '2',
+  name: 'system',
   path: '/',
   component: 'Layout',
-  redirect: '/workbench',
+  redirect: '',
   meta: {
-    title: '首页',
-    icon: 'dashboard',
+    title: '系统管理',
+    icon: 'system',
   },
   children: [
     {
-      id: '1-1',
-      name: 'workbench',
-      path: '/workbench',
+      id: '2-1',
+      name: 'menu',
+      path: '/menu/index',
       meta: {
-        title: '工作台',
-        icon: 'workbench',
+        title: '菜单管理',
+        icon: 'menu',
         noCache: false,
         link: null,
       },
-      component: 'workbench',
+      component: 'menu/index',
     },
     {
-      id: '1-2',
-      name: 'analytics',
-      path: '/analytics',
+      id: '2-2',
+      name: 'role',
+      path: '/role',
       meta: {
-        title: '分析页',
-        icon: 'analytics',
+        title: '角色管理',
+        icon: 'role',
         noCache: false,
         link: null,
       },
-      component: 'analytics',
+      component: 'role/index',
     },
   ],
 })

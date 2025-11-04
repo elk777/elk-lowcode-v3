@@ -17,4 +17,5 @@ export interface IRouter {
     noCache?: boolean
   }
   children?: IRouter[]
+  hidden?: boolean
 }
