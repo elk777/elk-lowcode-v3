@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-07 15:52:46
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-08 15:19:22
+ * @LastEditTime: 2025-11-06 11:05:12
  * @FilePath: \v3-admin-lowcode\src\mocks\browser.ts
  */
 import { setupWorker } from 'msw/browser'
@@ -15,7 +15,6 @@ const worker = setupWorker(...handlers)
 // 导出启动函数
 export async function startWorker() {
   await worker.start({
-    waitUntilReady: true,
     onUnhandledRequest: 'bypass',
   })
   console.log('[MSW] Mock Service Worker 已启动')

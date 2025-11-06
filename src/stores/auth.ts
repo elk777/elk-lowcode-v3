@@ -22,15 +22,19 @@ export const useAuthStore = defineStore('auth', {
     permissions: [], // 用户权限列表
   }),
   actions: {
+    // 设置token
     setToken(token: string) {
       this.token = token
     },
+    // 获取token
     getToken() {
       return this.token
     },
+    // 重置token
     resetToken() {
       this.token = ''
     },
+    // 设置用户信息
     setUserInfo(userInfo: IUserInfo) {
       this.name = userInfo.name
       this.avatar = userInfo.avatar

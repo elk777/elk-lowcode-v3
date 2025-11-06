@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 17:17:16
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-11 09:51:31
+ * @LastEditTime: 2025-11-06 14:37:12
  * @FilePath: \v3-admin-lowcode\src\layout\index.vue
 -->
 <template>
@@ -15,6 +15,7 @@
         :width="220"
         content-style="padding: 10px;"
         show-trigger="arrow-circle"
+        :collapsed="appStore.collapsed"
         :on-update:collapsed="changeCollapsed"
         bordered
       >
@@ -45,8 +46,7 @@ import Sidebar from './component/Sidebar/index.vue'
 import { useAppStore } from '@/stores/app'
 const appStore = useAppStore()
 const changeCollapsed = (collapsed: boolean) => {
-  console.log('🚀 ~ constchangeCollapsed ~ collapsed:', collapsed)
-  appStore.toggleCollapse()
+  appStore.toggleCollapse(collapsed)
 }
 </script>
 

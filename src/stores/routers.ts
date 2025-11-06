@@ -12,11 +12,10 @@ import router from '@/router'
 import { staticRoutes } from '@/router'
 import type { IRouter } from '@/interfaces/routers'
 import Layout from '@/layout/index.vue'
-import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 // 过滤动态路由，将路由字符串转为路由对象
 const filterAsyncRoutes = (routes: IRouter[]) => {
   return routes.filter((route) => {
-    // console.log("🚀 ~ filterAsyncRoutes ~ route:", route)
     if (route.component) {
       if (route.component === 'Layout') {
         route.component = Layout
@@ -30,6 +29,7 @@ const filterAsyncRoutes = (routes: IRouter[]) => {
     return true
   })
 }
+// 加载路由组件
 const loadView = (view: unknown) => {
   // 使用 import 实现路由懒加载
   return () => import(`@/views/${view}.vue`)
@@ -40,7 +40,7 @@ export const useRouterStore = defineStore('router', {
     return {
       routers: [] as IRouter[], // 路由表
       addRouters: [] as IRouter[], // 动态路由表
-      sidebarRouter: [] as RouteRecordRaw[], // 侧边栏路由表
+      sidebarRouter: [] as IRouter[], // 侧边栏路由表
     }
   },
   actions: {
@@ -54,7 +54,7 @@ export const useRouterStore = defineStore('router', {
       })
       this.sidebarRouter = [...staticRoutes, ...this.addRouters].filter(
         (route) => !route.hidden
-      ) as RouteRecordRaw[]
+      ) as IRouter[]
     },
     // 获取路由信息
     async GenerateRoutes() {

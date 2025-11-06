@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-09 14:52:11
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-04 17:23:28
+ * @LastEditTime: 2025-11-06 14:39:56
  * @FilePath: \v3-admin-lowcode\src\layout\component\Sidebar\components\Menu.vue
 -->
 
@@ -22,27 +22,28 @@
 </template>
 
 <script setup lang="ts">
-import { NMenu, NIcon } from 'naive-ui'
+import { NMenu, NIcon, type MenuOption } from 'naive-ui'
 import { ref, h } from 'vue'
 import type { Component } from 'vue'
+import type { IRouter } from '@/interfaces/routers'
 import { RouterLink } from 'vue-router'
-import { DashboardOutlined } from '@/libs/utils/icons'
 
 import { useAppStore } from '@/stores/app'
 import { useRouterStore } from '@/stores/routers'
 
 const appStore = useAppStore()
 const routerStore = useRouterStore()
-function renderIcon(icon: Component) {
+// 渲染图标
+function renderIcon(icon: Component | string) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
-
+// 侧边栏路由
 const sidebarRouter = routerStore.sidebarRouter
-console.log('🚀 ~ routerStore-sidebarRouter:', sidebarRouter)
-const menuOptions = ref([])
+// 菜单数据
+const menuOptions = ref<MenuOption[]>([])
 
 // 处理菜单数据-改造成n-menu
-const formatMenuData = (data) => {
+const formatMenuData = (data: IRouter[]): MenuOption[] => {
   return data.map((item) => {
     const { meta, children } = item
     if (children && children.length > 0) {
@@ -58,10 +59,7 @@ const formatMenuData = (data) => {
           h(
             RouterLink,
             {
-              to: {
-                name: item.name,
-                path: item.path,
-              },
+              to: item.path,
             },
             { default: () => meta.title }
           ),
@@ -71,7 +69,6 @@ const formatMenuData = (data) => {
   })
 }
 menuOptions.value = formatMenuData(sidebarRouter)
-console.log('🚀 ~ menuOptions.value:', menuOptions.value)
 </script>
 
 <style scoped>

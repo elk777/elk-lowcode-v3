@@ -3,11 +3,10 @@
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-04 16:12:53
+ * @LastEditTime: 2025-11-06 14:17:46
  * @FilePath: \v3-admin-lowcode\src\router\index.ts
  */
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
-import type { IRouter } from '@/interfaces/routers'
 const { VITE_ROUTER_MODE } = import.meta.env
 import Layout from '@/layout/index.vue'
 // 静态路由 - 非权限路由

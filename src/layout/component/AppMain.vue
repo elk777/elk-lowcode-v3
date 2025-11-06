@@ -3,16 +3,25 @@
  * @Autor: lyf
  * @Date: 2025-07-08 16:13:48
  * @LastEditors: lyf
- * @LastEditTime: 2025-07-08 16:53:08
+ * @LastEditTime: 2025-11-06 11:02:21
  * @FilePath: \v3-admin-lowcode\src\layout\component\AppMain.vue
 -->
 <template>
   <div class="w-100 h-100">
-    <transition>
+    <!-- 新版写法 -->
+    <router-view v-slot="{ Component }">
+      <transition name="fade-transform" mode="out-in">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
+    <!-- 旧版写法 -->
+    <!-- <transition>
       <keep-alive>
         <RouterView />
       </keep-alive>
-    </transition>
+    </transition> -->
   </div>
 </template>
 
