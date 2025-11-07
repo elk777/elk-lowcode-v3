@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 17:17:16
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-06 14:37:12
+ * @LastEditTime: 2025-11-07 15:35:28
  * @FilePath: \v3-admin-lowcode\src\layout\index.vue
 -->
 <template>
@@ -22,9 +22,10 @@
         <!-- 侧边导航栏 -->
         <Sidebar />
       </n-layout-sider>
-      <n-layout-content content-style="padding: 12px;">
+      <n-layout-content content-style="padding: 0px;">
         <!-- 右侧内容栏 -->
         <!-- 顶部工具栏 -->
+        <Navbar />
         <!-- 页面标签栏 -->
         <!-- 中心内容区 -->
         <AppMain />
@@ -37,18 +38,19 @@
 
 <script setup lang="ts">
 // 引入naive组件
-import { NLayout, NLayoutSider, NLayoutContent } from 'naive-ui'
+import { NLayout, NLayoutSider, NLayoutContent } from "naive-ui";
 // 引入AppMain组件
-import AppMain from './component/AppMain.vue'
+import AppMain from "./component/AppMain.vue";
 // 引入Sidebar组件
-import Sidebar from './component/Sidebar/index.vue'
+import Sidebar from "./component/Sidebar/index.vue";
+// 引入Navbar组件
+import Navbar from "./component/Navbar/index.vue";
 
-import { useAppStore } from '@/stores/app'
-const appStore = useAppStore()
+import { useAppStore } from "@/stores/app";
+const appStore = useAppStore();
 const changeCollapsed = (collapsed: boolean) => {
-  appStore.toggleCollapse(collapsed)
-}
+  appStore.toggleCollapse(collapsed);
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

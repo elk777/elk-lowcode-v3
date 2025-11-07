@@ -36,6 +36,9 @@ importers:
       '@types/node':
         specifier: ^22.14.0
         version: 22.15.32
+      '@unocss/preset-rem-to-px':
+        specifier: ^66.5.4
+        version: 66.5.4
       '@vicons/antd':
         specifier: ^0.13.0
         version: 0.13.0
@@ -936,6 +939,9 @@ packages:
 
   '@unocss/preset-mini@66.5.4':
     resolution: {integrity: sha512-KaBGsw3+Pi5ZTsp5u0OrUUUXFVltHin02cYhv3A4b9392Kej5R3y7zIf1VjiQ3ZXR4KZWfv0CQj0LBqIqAJ5WA==}
+
+  '@unocss/preset-rem-to-px@66.5.4':
+    resolution: {integrity: sha512-9Sz8kOmn3cyQ5Kr5v6cte873ZwbBzkqrSpGOIwqSCcH/wNrNZjmD0fTW1jd5UGA3m9kcAk5KGuFvxTWmHgCY6Q==}
 
   '@unocss/preset-tagify@66.5.4':
     resolution: {integrity: sha512-ck71rFCQZEwYDzwf99sjCBuzpT0PnkzwdqWwnR34pN71Lf3ePN16hV6pEo7pWuIiatAGFzXh0AHzJrIQ/61Cxw==}
@@ -3830,6 +3836,10 @@ snapshots:
       '@unocss/core': 66.5.4
       '@unocss/extractor-arbitrary-variants': 66.5.4
       '@unocss/rule-utils': 66.5.4
+
+  '@unocss/preset-rem-to-px@66.5.4':
+    dependencies:
+      '@unocss/core': 66.5.4
 
   '@unocss/preset-tagify@66.5.4':
     dependencies:

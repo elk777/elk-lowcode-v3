@@ -25,6 +25,7 @@
     "@tsconfig/node22": "^22.0.1",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.14.0",
+    "@unocss/preset-rem-to-px": "^66.5.4",
     "@vicons/antd": "^0.13.0",
     "@vicons/fa": "^0.13.0",
     "@vicons/fluent": "^0.13.0",

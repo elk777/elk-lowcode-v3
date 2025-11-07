@@ -7,7 +7,7 @@
  * @FilePath: \v3-admin-lowcode\src\libs\utils\icons.ts
  */
 
-import { ColorFilterSharp } from '@vicons/ionicons5'
+import { ColorFilterSharp, SearchOutline } from '@vicons/ionicons5'
 import { DashboardOutlined, UserOutlined, LockOutlined } from '@vicons/antd'
 
-export { ColorFilterSharp, DashboardOutlined, UserOutlined, LockOutlined }
+export { ColorFilterSharp, SearchOutline, DashboardOutlined, UserOutlined, LockOutlined }
