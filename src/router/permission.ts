@@ -2,8 +2,8 @@
  * @Description: 路由守卫配置
  * @Autor: lyf
  * @Date: 2025-07-07 14:51:00
- * @LastEditors: elk
- * @LastEditTime: 2025-11-03 18:36:31
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-08 14:37:58
  * @FilePath: /elk-lowcode-v3/src/router/permission.ts
  */
 import router from '@/router'
@@ -32,6 +32,7 @@ router.beforeEach(async (to, form, next) => {
   // 进行token验证，跳转登录
   const token = useAuthStore().getToken(),
     roles = useAuthStore().roles
+    console.log("🚀 ~ roles:", roles)
   if (token) {
     if (to.path === '/login') {
       next({ path: '/' })

@@ -69,6 +69,7 @@ const formatMenuData = (data: IRouter[]): MenuOption[] => {
   })
 }
 menuOptions.value = formatMenuData(sidebarRouter)
+console.log("🚀 ~ menuOptions.value:", menuOptions.value)
 </script>
 
 <style scoped>

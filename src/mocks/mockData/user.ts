@@ -2,9 +2,9 @@
  * @Description: 用户数据mock
  * @Autor: lyf
  * @Date: 2025-07-07 16:09:50
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-04 16:42:44
- * @FilePath: \v3-admin-lowcode\src\mocks\mockData\user.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-08 14:39:48
+ * @FilePath: /elk-lowcode-v3/src/mocks/mockData/user.ts
  */
 
 import { factory, primaryKey } from '@mswjs/data'
@@ -27,6 +27,7 @@ export const userDB = factory({
     updatedAt: Date,
     createdAt: Date,
     avatar: String,
+    roles: Array,
   },
   router: {
     id: primaryKey(String),
@@ -58,6 +59,7 @@ userDB.user.create({
   createdAt: '2024-07-21 13:28:33',
   updateBy: '',
   updatedAt: '',
+  roles: ['admin'],
 })
 
 userDB.user.create({

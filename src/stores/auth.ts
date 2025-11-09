@@ -2,9 +2,9 @@
  * @Description: 权限模块 - token
  * @Autor: lyf
  * @Date: 2025-06-25 16:15:00
- * @LastEditors: lyf
- * @LastEditTime: 2025-10-28 16:11:56
- * @FilePath: \v3-admin-lowcode\src\stores\auth.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-08 14:41:00
+ * @FilePath: /elk-lowcode-v3/src/stores/auth.ts
  */
 
 import { defineStore } from 'pinia'
@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth', {
     userInfo: {}, // 用户基本信息
     name: '', // 用户名称
     avatar: '', // 用户头像地址
-    roles: ['*'], // 用户所属角色列表
+    roles: [], // 用户所属角色列表
     permissions: [], // 用户权限列表
   }),
   actions: {
@@ -33,6 +33,14 @@ export const useAuthStore = defineStore('auth', {
     // 重置token
     resetToken() {
       this.token = ''
+    },
+    // 重置用户信息
+    resetUserInfo() {
+      this.userInfo = {}
+      this.name = ''
+      this.avatar = ''
+      this.roles = []
+      this.permissions = []
     },
     // 设置用户信息
     setUserInfo(userInfo: IUserInfo) {
@@ -56,6 +64,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         const res = await loginOut()
         this.resetToken()
+        this.resetUserInfo()
         return res
       } catch (error) {
         Promise.reject(error)

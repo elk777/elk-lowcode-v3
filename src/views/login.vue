@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
  * @LastEditors: elk 
- * @LastEditTime: 2025-11-01 14:04:06
+ * @LastEditTime: 2025-11-08 14:32:31
  * @FilePath: /elk-lowcode-v3/src/views/login.vue
 -->
 <template>
@@ -18,14 +18,14 @@
         class="flex-[1.3] bg-gradient-to-br from-[#4e73df] to-[#5e83e0] p-[50px] flex flex-col justify-center items-center text-white text-center relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('../assets/logo.svg')] before:bg-no-repeat before:bg-center before:bg-[length:300px] before:opacity-5 before:z-0"
       >
         <h1 class="text-[42px] font-bold mb-6 relative z-1 drop-shadow-md">V3 Admin Lowcode</h1>
-        <p class="text-lg opacity-90 mb-[50px] leading-[1.7] max-w-[550px] relative z-1">
+        <p class="text-16 opacity-90 mb-[50px] leading-[1.7] max-w-[550px] relative z-1">
           基于 Vue3、Vite4、TypeScript、Naive UI 的中后台解决方案
         </p>
         <div class="w-full flex justify-center mt-10 relative z-1">
           <img
             src="../assets/logo.svg"
             alt="Banner"
-            class="w-[200px] h-[200px] animate-[float_6s_ease-in-out_infinite] brightness-105"
+            class="w-200 h-200 animate-[float_6s_ease-in-out_infinite] brightness-105"
           />
         </div>
       </div>
@@ -33,8 +33,8 @@
       <!-- 右侧登录区 -->
       <div class="w-[460px] p-[60px_50px] flex flex-col justify-center bg-white">
         <div class="flex flex-col items-center mb-[45px]">
-          <img src="../assets/logo.svg" alt="Logo" class="w-20 h-20 mb-4" />
-          <h2 class="text-3xl font-semibold text-[#333] m-0">V3 Admin</h2>
+          <img src="../assets/logo.svg" alt="Logo" class="w-50 h-50 mb-4" />
+          <h2 class="text-20 font-semibold text-[#333] m-0">V3 Admin</h2>
         </div>
 
         <n-form ref="formRef" :model="formData" :rules="rules" size="large">
@@ -62,7 +62,7 @@
 
           <div class="flex justify-between items-center mb-6">
             <n-checkbox v-model:checked="formData.remember">记住我</n-checkbox>
-            <n-button text class="text-[#4e73df] text-sm">忘记密码？</n-button>
+            <n-button text class="text-[#4e73df] text-12.15">忘记密码？</n-button>
           </div>
 
           <div class="mb-4">
@@ -84,9 +84,6 @@ import { NForm, NFormItem, NInput, NButton, NCheckbox, NIcon } from 'naive-ui'
 import { UserOutlined, LockOutlined } from '@/libs/utils/icons'
 import { useAuthStore } from '@/stores/auth'
 
-// import { login } from '@/apis/login'
-// vue2中的全局属性
-const { proxy } = getCurrentInstance()!
 
 // vue3中的inject
 const $message = inject('$message')
