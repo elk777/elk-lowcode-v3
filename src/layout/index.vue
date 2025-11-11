@@ -24,10 +24,11 @@
       </n-layout-sider>
       <n-layout-content content-style="padding: 0px;">
         <!-- 右侧内容栏 -->
-        <!-- 顶部工具栏 -->
+        <!-- 1)顶部工具栏 -->
         <Navbar />
-        <!-- 页面标签栏 -->
-        <!-- 中心内容区 -->
+        <!-- 2)页面标签栏 -->
+        <TagsView />
+        <!-- 3中心内容区 -->
         <AppMain />
         <!-- 侧边抽屉 -->
         <!-- 全局搜索 -->
@@ -45,6 +46,8 @@ import AppMain from "./component/AppMain.vue";
 import Sidebar from "./component/Sidebar/index.vue";
 // 引入Navbar组件
 import Navbar from "./component/Navbar/index.vue";
+// 引入标签导航栏
+import TagsView from "./component/TagsView/index.vue";
 
 import { useAppStore } from "@/stores/app";
 const appStore = useAppStore();

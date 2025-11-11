@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-09 14:52:03
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-07 14:16:50
+ * @LastEditTime: 2025-11-10 11:32:56
  * @FilePath: \v3-admin-lowcode\src\layout\component\Sidebar\components\Logo.vue
 -->
 <template>

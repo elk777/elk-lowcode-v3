@@ -38,6 +38,7 @@ export const staticRoutes = [
         meta: {
           title: '工作台',
           icon: 'home',
+          affix: true,
         },
       },
       {
