@@ -23,28 +23,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
-import { NButton, NSpace } from 'naive-ui'
-import { useAuthStore } from '@/stores/auth'
+import { ref, inject } from "vue";
+import { NButton, NSpace } from "naive-ui";
+import { useAuthStore } from "@/stores/auth";
 // import { useCounterStore } from '@/stores/counter'
 
 // const counterStore = useCounterStore()
-const message = inject('$message')
-console.log('🚀 ~ message:', message)
-const authStore = useAuthStore()
+const message = inject("$message");
+const authStore = useAuthStore();
 const handleLogout = async () => {
   // 登出
-  await authStore.LoginOut()
-  location.href = '/index'
-  message.success('登出成功')
-}
+  await authStore.LoginOut();
+  location.href = "/index";
+  message.success("登出成功");
+};
 
-const count = ref<number>(10)
+const count = ref<number>(10);
 
 // 解构取值 - 破坏了响应式，不推荐使用
 // const { count, doubleCount, increment } = counterStore
 
-console.log('🚀 ~ count:', count.value)
 // counterStore.$reset()
 // counterStore.count = 100
 // counterStore.$patch({
@@ -60,8 +58,8 @@ console.log('🚀 ~ count:', count.value)
 //   console.log('🚀 ~ doubleCount-increment:', counterStore.doubleCount)
 // }
 const onIncrement = () => {
-  return true
-}
+  return true;
+};
 </script>
 
 <style scoped lang="scss"></style>

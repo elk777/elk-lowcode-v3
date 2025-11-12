@@ -3,13 +3,13 @@
  * @Autor: lyf
  * @Date: 2025-11-11 14:47:31
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-11 17:05:35
+ * @LastEditTime: 2025-11-12 16:34:54
  * @FilePath: \v3-admin-lowcode\src\layout\component\TagsView\index.vue
 -->
 <template>
   <div>
     <n-tabs
-      :value="activeName"
+      v-model:value="activeName"
       size="small"
       type="card"
       closable
@@ -35,23 +35,22 @@
 
 <script setup lang="ts">
 import { NTabs, NTabPane } from "naive-ui";
-import { ref, watchEffect, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type { RouteLocationNormalizedLoadedGeneric } from "vue-router";
 import { useTagsViewStore } from "@/stores/tagsview";
 const route = useRoute();
 const router = useRouter();
 const tagsViewStore = useTagsViewStore();
-console.log("🚀 ~ route:", route);
-const activeName = ref();
-const tabs = ref([]);
+const activeName = ref("/workbench");
 
 const addTags = () => {
-  const { name } = route;
-  if (name) {
+  const { path } = route;
+  if (path) {
     tagsViewStore.addView(route);
   }
 };
+addTags();
 
 /**
  * @description: 标签页导航删除图标显隐
@@ -67,20 +66,19 @@ const tabClosable = computed(() => {
     return true;
   };
 });
-watchEffect(() => {
-  const { path } = route;
-  console.log("🚀 ~ route-watch-Effect:", route);
-  console.log("🚀 ~ visitedViews-watch-Effect:", tagsViewStore.visitedViews);
-  activeName.value = path;
-  addTags();
-});
+watch(
+  () => route.path,
+  (path) => {
+    activeName.value = path;
+    addTags();
+  }
+);
 
 const updateTab = (path: string) => {
   //  路由跳转
   router.push(path);
 };
 const removeTab = (path: string) => {
-  console.log("🚀 ~ removeTab ~ path:", path);
   if (path) {
     tagsViewStore.delView(path);
   }
