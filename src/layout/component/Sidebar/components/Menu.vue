@@ -3,14 +3,16 @@
  * @Autor: lyf
  * @Date: 2025-07-09 14:52:11
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-06 14:39:56
+ * @LastEditTime: 2025-11-12 17:11:38
  * @FilePath: \v3-admin-lowcode\src\layout\component\Sidebar\components\Menu.vue
 -->
 
 <template>
   <div>
     <n-menu
+      ref="menuInstRef"
       accordion
+      v-model:value="selectedKey"
       :indent="12"
       :options="menuOptions"
       :collapsed="appStore.collapsed"
@@ -23,20 +25,31 @@
 
 <script setup lang="ts">
 import { NMenu, NIcon, type MenuOption } from 'naive-ui'
-import { ref, h } from 'vue'
+import type { MenuInst } from 'naive-ui'
+import { ref, h, watch } from 'vue'
 import type { Component } from 'vue'
 import type { IRouter } from '@/interfaces/routers'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 
 import { useAppStore } from '@/stores/app'
 import { useRouterStore } from '@/stores/routers'
 
+const menuInstRef = ref<MenuInst | null>(null)
 const appStore = useAppStore()
 const routerStore = useRouterStore()
-// 渲染图标
+const route = useRoute()
+const selectedKey = ref(route.name as string)// 渲染图标
 function renderIcon(icon: Component | string) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
+
+watch(
+  () => route.name,
+  (name) => {
+    selectedKey.value = name as string
+    menuInstRef.value?.showOption(name as string)
+  }
+)
 // 侧边栏路由
 const sidebarRouter = routerStore.sidebarRouter
 // 菜单数据
@@ -69,8 +82,7 @@ const formatMenuData = (data: IRouter[]): MenuOption[] => {
   })
 }
 menuOptions.value = formatMenuData(sidebarRouter)
-console.log("🚀 ~ menuOptions.value:", menuOptions.value)
+// console.log("🚀 ~ menuOptions.value:", menuOptions.value)
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
