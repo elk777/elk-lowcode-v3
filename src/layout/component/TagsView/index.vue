@@ -2,9 +2,9 @@
  * @Description: 标签导航栏
  * @Autor: lyf
  * @Date: 2025-11-11 14:47:31
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-12 16:34:54
- * @FilePath: \v3-admin-lowcode\src\layout\component\TagsView\index.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-12 19:24:14
+ * @FilePath: /elk-lowcode-v3/src/layout/component/TagsView/index.vue
 -->
 <template>
   <div>
@@ -14,7 +14,6 @@
       type="card"
       closable
       @close="removeTab"
-      add-tab-class="tab-class"
       @update-value="updateTab"
     >
       <n-tab-pane
@@ -42,7 +41,7 @@ import { useTagsViewStore } from "@/stores/tagsview";
 const route = useRoute();
 const router = useRouter();
 const tagsViewStore = useTagsViewStore();
-const activeName = ref("/workbench");
+const activeName = ref(route.path);
 
 const addTags = () => {
   const { path } = route;
@@ -85,8 +84,6 @@ const removeTab = (path: string) => {
 };
 </script>
 
-<style lang="css" scoped>
-.tab-class {
-  border-radius: 10px;
-}
+<style scoped>
+
 </style>
