@@ -2,9 +2,9 @@
  * @Description: 菜单布局
  * @Autor: lyf
  * @Date: 2025-07-09 14:52:11
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-13 15:56:56
- * @FilePath: \v3-admin-lowcode\src\layout\component\Sidebar\components\Menu.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-13 21:49:26
+ * @FilePath: /elk-lowcode-v3/src/layout/component/Sidebar/components/Menu.vue
 -->
 
 <template>
@@ -30,7 +30,7 @@ import { ref, h, watch } from 'vue'
 import type { Component } from 'vue'
 import type { IRouter } from '@/interfaces/routers'
 import { RouterLink, useRoute } from 'vue-router'
-
+import SvgIcon from '@/components/SvgIcon/index.vue'
 import { useAppStore } from '@/stores/app'
 import { useRouterStore } from '@/stores/routers'
 
@@ -38,9 +38,10 @@ const menuInstRef = ref<MenuInst | null>(null)
 const appStore = useAppStore()
 const routerStore = useRouterStore()
 const route = useRoute()
-const selectedKey = ref(route.name as string)// 渲染图标
-function renderIcon(icon: Component | string) {
-  return () => h(NIcon, null, { default: () => h(icon) })
+const selectedKey = ref(route.name as string) // 渲染图标
+
+function renderIcon(iconName: string) {
+  return () => h(SvgIcon, { name: iconName })
 }
 
 watch(
@@ -48,7 +49,7 @@ watch(
   (name) => {
     selectedKey.value = name as string
     menuInstRef.value?.showOption(name as string)
-  }
+  },
 )
 // 侧边栏路由
 const sidebarRouter = routerStore.sidebarRouter
@@ -74,7 +75,7 @@ const formatMenuData = (data: IRouter[]): MenuOption[] => {
             {
               to: item.path,
             },
-            { default: () => meta.title }
+            { default: () => meta.title },
           ),
         key: item.name,
       }

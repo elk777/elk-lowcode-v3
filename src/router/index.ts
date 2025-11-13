@@ -2,9 +2,9 @@
  * @Description: 路由配置
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-13 16:04:03
- * @FilePath: \v3-admin-lowcode\src\router\index.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-13 20:38:48
+ * @FilePath: /elk-lowcode-v3/src/router/index.ts
  */
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 const { VITE_ROUTER_MODE } = import.meta.env
@@ -43,7 +43,7 @@ export const staticRoutes = [
         component: () => import('@/views/workbench.vue'),
         meta: {
           title: '工作台',
-          icon: 'home',
+          icon: 'workbench',
           affix: true,
         },
       },
@@ -53,7 +53,7 @@ export const staticRoutes = [
         component: () => import('@/views/analytics.vue'),
         meta: {
           title: '分析页',
-          icon: 'home',
+          icon: 'analytics',
         },
       },
     ],
