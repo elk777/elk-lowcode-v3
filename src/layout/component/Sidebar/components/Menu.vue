@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-09 14:52:11
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-12 17:11:38
+ * @LastEditTime: 2025-11-13 15:56:56
  * @FilePath: \v3-admin-lowcode\src\layout\component\Sidebar\components\Menu.vue
 -->
 
@@ -82,7 +82,6 @@ const formatMenuData = (data: IRouter[]): MenuOption[] => {
   })
 }
 menuOptions.value = formatMenuData(sidebarRouter)
-// console.log("🚀 ~ menuOptions.value:", menuOptions.value)
 </script>
 
 <style scoped></style>

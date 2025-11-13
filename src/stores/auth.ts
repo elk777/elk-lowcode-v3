@@ -2,9 +2,9 @@
  * @Description: 权限模块 - token
  * @Autor: lyf
  * @Date: 2025-06-25 16:15:00
- * @LastEditors: elk 
- * @LastEditTime: 2025-11-08 14:41:00
- * @FilePath: /elk-lowcode-v3/src/stores/auth.ts
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-13 14:13:31
+ * @FilePath: \v3-admin-lowcode\src\stores\auth.ts
  */
 
 import { defineStore } from 'pinia'
@@ -82,5 +82,7 @@ export const useAuthStore = defineStore('auth', {
     },
   },
   // 持久化
-  persist: true,
+  persist: {
+    pick: ['token'],
+  },
 })

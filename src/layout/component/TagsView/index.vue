@@ -2,9 +2,9 @@
  * @Description: 标签导航栏
  * @Autor: lyf
  * @Date: 2025-11-11 14:47:31
- * @LastEditors: elk 
- * @LastEditTime: 2025-11-12 19:24:14
- * @FilePath: /elk-lowcode-v3/src/layout/component/TagsView/index.vue
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-13 15:05:18
+ * @FilePath: \v3-admin-lowcode\src\layout\component\TagsView\index.vue
 -->
 <template>
   <div>
@@ -41,7 +41,8 @@ import { useTagsViewStore } from "@/stores/tagsview";
 const route = useRoute();
 const router = useRouter();
 const tagsViewStore = useTagsViewStore();
-const activeName = ref(route.path);
+const defaultPath = route.path;
+const activeName = ref(defaultPath);
 
 const addTags = () => {
   const { path } = route;
@@ -84,6 +85,4 @@ const removeTab = (path: string) => {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

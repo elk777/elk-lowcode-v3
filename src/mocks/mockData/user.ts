@@ -2,9 +2,9 @@
  * @Description: 用户数据mock
  * @Autor: lyf
  * @Date: 2025-07-07 16:09:50
- * @LastEditors: elk 
- * @LastEditTime: 2025-11-08 14:39:48
- * @FilePath: /elk-lowcode-v3/src/mocks/mockData/user.ts
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-13 15:57:46
+ * @FilePath: \v3-admin-lowcode\src\mocks\mockData\user.ts
  */
 
 import { factory, primaryKey } from '@mswjs/data'
@@ -95,26 +95,26 @@ userDB.router.create({
     {
       id: '2-1',
       name: 'menu',
-      path: '/menu/index',
+      path: '/system/menu/index',
       meta: {
         title: '菜单管理',
         icon: 'menu',
         noCache: false,
         link: null,
       },
-      component: 'menu/index',
+      component: 'system/menu/index',
     },
     {
       id: '2-2',
       name: 'role',
-      path: '/role',
+      path: '/system/role/index',
       meta: {
         title: '角色管理',
         icon: 'role',
         noCache: false,
         link: null,
       },
-      component: 'role/index',
+      component: 'system/role/index',
     },
   ],
 })

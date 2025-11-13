@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:06
  * @LastEditors: lyf
- * @LastEditTime: 2025-10-27 15:35:47
+ * @LastEditTime: 2025-11-13 13:55:17
  * @FilePath: \v3-admin-lowcode\src\views\workbench.vue
 -->
 <template>
@@ -26,6 +26,8 @@
 import { ref, inject } from "vue";
 import { NButton, NSpace } from "naive-ui";
 import { useAuthStore } from "@/stores/auth";
+import router from "@/router";
+console.log("🚀 ~ router:", router.getRoutes());
 // import { useCounterStore } from '@/stores/counter'
 
 // const counterStore = useCounterStore()

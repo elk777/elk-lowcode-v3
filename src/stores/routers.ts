@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-10-28 16:23:42
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-04 16:56:11
+ * @LastEditTime: 2025-11-13 15:50:35
  * @FilePath: \v3-admin-lowcode\src\stores\routers.ts
  */
 import { defineStore } from 'pinia'
@@ -13,14 +13,16 @@ import { staticRoutes } from '@/router'
 import type { IRouter } from '@/interfaces/routers'
 import Layout from '@/layout/index.vue'
 import type { RouteRecordRaw } from 'vue-router'
+import { markRaw } from 'vue'
 // 过滤动态路由，将路由字符串转为路由对象
 const filterAsyncRoutes = (routes: IRouter[]) => {
   return routes.filter((route) => {
     if (route.component) {
       if (route.component === 'Layout') {
-        route.component = Layout
+        // 使用markRaw标记为静态资源，否则会提示动态组件错误
+        route.component = markRaw(Layout)
       } else {
-        route.component = loadView(route.component)
+        route.component = loadView(route.component as string)
       }
     }
     if (route.children) {
@@ -29,11 +31,22 @@ const filterAsyncRoutes = (routes: IRouter[]) => {
     return true
   })
 }
-// 加载路由组件
-const loadView = (view: unknown) => {
-  // 使用 import 实现路由懒加载
-  return () => import(`@/views/${view}.vue`)
+// 匹配views里面所有的.vue文件  -  vite
+const modules = import.meta.glob('../views/**/*.vue')
+export const loadView = (view: string) => {
+  let res
+  for (const path in modules) {
+    const dir = path.split('views/')[1].split('.vue')[0]
+    if (dir === view) {
+      res = () => modules[path]()
+    }
+  }
+  return res
 }
+// // 加载路由组件 - webpack
+// const loadView = (view: unknown) => {
+//   return modules[`../views/${view}.vue`]
+// }
 
 export const useRouterStore = defineStore('router', {
   state: () => {
@@ -53,7 +66,7 @@ export const useRouterStore = defineStore('router', {
         router.addRoute(routeRecordRaw)
       })
       this.sidebarRouter = [...staticRoutes, ...this.addRouters].filter(
-        (route) => !route.hidden
+        (route) => !route.hidden,
       ) as IRouter[]
     },
     // 获取路由信息

@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-06 14:17:46
+ * @LastEditTime: 2025-11-13 16:04:03
  * @FilePath: \v3-admin-lowcode\src\router\index.ts
  */
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
@@ -19,6 +19,12 @@ export const staticRoutes = [
       title: '登录',
       icon: 'login',
     },
+    hidden: true,
+  },
+  // 添加一个通配符路由，用于处理未匹配到的路由
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/error/404.vue'),
     hidden: true,
   },
   {
