@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-07-07 16:09:50
  * @LastEditors: lyf
- * @LastEditTime: 2025-11-13 15:57:46
+ * @LastEditTime: 2025-11-14 17:01:20
  * @FilePath: \v3-admin-lowcode\src\mocks\mockData\user.ts
  */
 
@@ -115,6 +115,67 @@ userDB.router.create({
         link: null,
       },
       component: 'system/role/index',
+    },
+  ],
+})
+userDB.router.create({
+  id: '3',
+  name: 'lowCode',
+  path: '/',
+  component: 'Layout',
+  redirect: '',
+  meta: {
+    title: '低代码管理',
+    icon: 'lowCode',
+  },
+  children: [
+    {
+      id: '3-1',
+      name: 'metaManage',
+      path: '/lowCode/metaManage/index',
+      meta: {
+        title: '元数据管理',
+        icon: 'meta',
+        noCache: false,
+        link: null,
+      },
+      component: 'lowCode/metaManage/index',
+    },
+    {
+      id: '3-2',
+      name: 'listManage',
+      path: '/lowCode/listManage/index',
+      meta: {
+        title: '列表管理',
+        icon: 'list',
+        noCache: false,
+        link: null,
+      },
+      component: 'lowCode/listManage/index',
+    },
+    {
+      id: '3-3',
+      name: 'formManage',
+      path: '/lowCode/formManage/index',
+      meta: {
+        title: '表单管理',
+        icon: 'form',
+        noCache: false,
+        link: null,
+      },
+      component: 'lowCode/formManage/index',
+    },
+    {
+      id: '3-4',
+      name: 'affairManage',
+      path: '/lowCode/affairManage/index',
+      meta: {
+        title: '事务管理',
+        icon: 'affair',
+        noCache: false,
+        link: null,
+      },
+      component: 'lowCode/affairManage/index',
     },
   ],
 })
