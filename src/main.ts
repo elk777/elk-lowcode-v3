@@ -22,6 +22,9 @@ import 'virtual:uno.css'
 // 路径权限
 import '@/router/permission'
 
+// 引入svg图标
+import 'virtual:svg-icons-register'
+
 // Mock模式
 const enableMocks =
   import.meta.env.VITE_NODE_ENV === 'development' && import.meta.env.VITE_MOCK_ENABLE === 'true'

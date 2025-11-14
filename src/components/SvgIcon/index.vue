@@ -1,28 +1,38 @@
-<!-- SvgIcon.vue -->
+<!--
+ * @Description: svg图标
+ * @Autor: lyf
+ * @Date: 2025-11-14 13:59:34
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-14 15:18:42
+ * @FilePath: \v3-admin-lowcode\src\components\SvgIcon\index.vue
+-->
 <template>
-  <div v-if="svgContent" v-html="svgContent" />
-  <n-icon v-else>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.2" />
+  <n-icon :size="size">
+    <svg aria-hidden="true">
+      <use :xlink:href="svgContent" :fill="props.color" />
     </svg>
   </n-icon>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { getSvgIcon } from '@/libs/utils/icons'
+import { NIcon } from "naive-ui";
+import { computed } from "vue";
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
+  size: {
+    type: Number,
+    default: 20,
+  },
+  color: {
+    type: String,
+    default: "currentColor",
+  },
+});
 
-const props = defineProps<{
-  name: string
-  size?: number | string
-}>()
-
-const svgContent = computed(() => getSvgIcon(props.name))
+const svgContent = computed(() => `#icon-${props.name}`);
 </script>
 
-<style scoped>
-:deep(svg) {
-  width: v-bind(size);
-  height: v-bind(size);
-}
-</style>
+<style scoped></style>

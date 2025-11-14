@@ -2,9 +2,9 @@
  * @Description: 菜单布局
  * @Autor: lyf
  * @Date: 2025-07-09 14:52:11
- * @LastEditors: elk 
- * @LastEditTime: 2025-11-13 21:49:26
- * @FilePath: /elk-lowcode-v3/src/layout/component/Sidebar/components/Menu.vue
+ * @LastEditors: lyf
+ * @LastEditTime: 2025-11-14 15:07:50
+ * @FilePath: \v3-admin-lowcode\src\layout\component\Sidebar\components\Menu.vue
 -->
 
 <template>
@@ -24,10 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import { NMenu, NIcon, type MenuOption } from 'naive-ui'
+import { NMenu, type MenuOption } from 'naive-ui'
 import type { MenuInst } from 'naive-ui'
 import { ref, h, watch } from 'vue'
-import type { Component } from 'vue'
 import type { IRouter } from '@/interfaces/routers'
 import { RouterLink, useRoute } from 'vue-router'
 import SvgIcon from '@/components/SvgIcon/index.vue'
@@ -78,6 +77,7 @@ const formatMenuData = (data: IRouter[]): MenuOption[] => {
             { default: () => meta.title },
           ),
         key: item.name,
+        icon: renderIcon(meta.icon),
       }
     }
   })
