@@ -2,13 +2,273 @@
  * @Description: 首页-工作台-内容
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:06
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-14 15:25:11
- * @FilePath: \v3-admin-lowcode\src\views\workbench.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-12-04 16:31:25
+ * @FilePath: /elk-lowcode-v3/src/views/workbench.vue
 -->
 <template>
   <div class="app-con">
     <div class="w-22 h-22 border-4 bg-[#785947]">Index</div>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
+    <n-space>
+      <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
+      <n-button type="tertiary"> Tertiary </n-button>
+      <n-button type="primary"> Primary </n-button>
+      <n-button type="info"> Info </n-button>
+      <n-button type="success"> Success </n-button>
+      <n-button type="warning"> Warning </n-button>
+      <n-button type="error" @click="onIncrement"> Error </n-button>
+      <div>{{ count }}</div>
+    </n-space>
     <n-space>
       <n-button class="w-22 h-22" @click="handleLogout">登出</n-button>
       <n-button type="tertiary"> Tertiary </n-button>
@@ -33,7 +293,6 @@ import router from "@/router";
 const message = inject("$message");
 const authStore = useAuthStore();
 const handleLogout = async () => {
-  // 登出
   await authStore.LoginOut();
   location.href = "/index";
   message.success("登出成功");

@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
  * @LastEditors: elk 
- * @LastEditTime: 2025-11-08 14:32:31
+ * @LastEditTime: 2025-12-05 14:48:21
  * @FilePath: /elk-lowcode-v3/src/views/login.vue
 -->
 <template>
@@ -77,16 +77,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, getCurrentInstance, inject } from 'vue'
+import { ref, reactive, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import type { FormInst, FormRules, FormItemRule } from 'naive-ui'
+import type { MessageApiInjection } from 'naive-ui/lib/message/src/MessageProvider'
 import { NForm, NFormItem, NInput, NButton, NCheckbox, NIcon } from 'naive-ui'
 import { UserOutlined, LockOutlined } from '@/libs/utils/icons'
 import { useAuthStore } from '@/stores/auth'
 
 
 // vue3中的inject
-const $message = inject('$message')
+const $message = inject<MessageApiInjection>('$message')
 console.log('🚀 ~ message:', $message)
 
 // 定义表单数据接口

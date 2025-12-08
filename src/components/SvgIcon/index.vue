@@ -2,9 +2,9 @@
  * @Description: svg图标
  * @Autor: lyf
  * @Date: 2025-11-14 13:59:34
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-14 15:18:42
- * @FilePath: \v3-admin-lowcode\src\components\SvgIcon\index.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-12-08 14:55:50
+ * @FilePath: /elk-lowcode-v3/src/components/SvgIcon/index.vue
 -->
 <template>
   <n-icon :size="size">

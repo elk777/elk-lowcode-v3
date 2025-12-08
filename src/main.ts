@@ -2,12 +2,14 @@
  * @Description: 入口文件
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
- * @LastEditors: elk
- * @LastEditTime: 2025-11-01 13:36:54
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-20 16:04:06
  * @FilePath: /elk-lowcode-v3/src/main.ts
  */
 // 重置样式
 import './style/reset.css'
+// 公共样式
+import './style/common.css'
 
 import { createApp } from 'vue'
 import { setupPinia } from './stores'

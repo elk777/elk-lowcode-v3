@@ -1,0 +1,15 @@
+/*
+ * @Author: elk
+ * @Date: 2025-11-20 16:02:13
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-20 16:17:45
+ * @FilePath: /elk-lowcode-v3/src/style/common.css
+ * @Description: 公共样式表
+ */
+
+/* 中心主容器 */
+.main-container {
+    /* width: 100%;
+    height: 100%; */
+    padding: 10px;
+}

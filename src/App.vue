@@ -2,14 +2,14 @@
  * @Description: 
  * @Autor: lyf
  * @Date: 2025-06-18 16:55:43
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-06 10:56:59
- * @FilePath: \v3-admin-lowcode\src\App.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-21 14:36:46
+ * @FilePath: /elk-lowcode-v3/src/App.vue
 -->
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
 import { NMessageProvider, NConfigProvider, NLoadingBarProvider } from 'naive-ui'
-
+import { zhCN, dateZhCN } from 'naive-ui'
 import { watchEffect } from 'vue'
 
 const route = useRoute()
@@ -19,7 +19,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <n-config-provider>
+  <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
     <n-message-provider>
       <n-loading-bar-provider>
         <RouterView />

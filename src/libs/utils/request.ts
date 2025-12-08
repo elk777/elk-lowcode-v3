@@ -2,12 +2,13 @@
  * @Description: 请求封装
  * @Autor: lyf
  * @Date: 2025-06-19 14:32:14
- * @LastEditors: lyf
- * @LastEditTime: 2025-07-14 16:29:33
- * @FilePath: \v3-admin-lowcode\src\libs\utils\request.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-11-28 15:56:05
+ * @FilePath: /elk-lowcode-v3/src/libs/utils/request.ts
  */
 import axios from 'axios'
 import { getBasePath } from '@/mocks/utils'
+import { useAuthStore } from '@/stores/auth'
 
 const request = axios.create({
   baseURL: import.meta.env.VITE_API_URL + getBasePath(),
@@ -18,7 +19,8 @@ const request = axios.create({
 request.interceptors.request.use(
   function (config) {
     // 请求前处理逻辑
-
+    const { token } = useAuthStore()
+    config.headers.Authorization = 'Bearer ' + token
     return config
   },
   function (error) {

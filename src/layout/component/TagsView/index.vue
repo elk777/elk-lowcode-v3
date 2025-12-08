@@ -2,12 +2,12 @@
  * @Description: 标签导航栏
  * @Autor: lyf
  * @Date: 2025-11-11 14:47:31
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-13 15:05:18
- * @FilePath: \v3-admin-lowcode\src\layout\component\TagsView\index.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-12-04 16:43:58
+ * @FilePath: /elk-lowcode-v3/src/layout/component/TagsView/index.vue
 -->
 <template>
-  <div>
+  <div class="h-50">
     <n-tabs
       v-model:value="activeName"
       size="small"

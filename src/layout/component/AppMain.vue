@@ -2,12 +2,12 @@
  * @Description: 中心区域内容
  * @Autor: lyf
  * @Date: 2025-07-08 16:13:48
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-06 11:02:21
- * @FilePath: \v3-admin-lowcode\src\layout\component\AppMain.vue
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-12-05 15:11:52
+ * @FilePath: /elk-lowcode-v3/src/layout/component/AppMain.vue
 -->
 <template>
-  <div class="w-100 h-100">
+  <div class="w-100% h-100vh overflow-auto">
     <!-- 新版写法 -->
     <router-view v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
