@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-11-13 18:34:22
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-08 17:04:45
+ * @LastEditTime: 2025-12-09 17:05:34
  * @FilePath: /elk-lowcode-v3/src/views/system/menu/index.vue
  * @Description: 菜单管理
 -->
@@ -24,7 +24,7 @@
     </div>
     <!-- 列表层 使用card 和table 组合-->
     <div class="mt-10">
-      <n-card hoverable :style="{ height: 'calc(100vh - 170px)' }">
+      <n-card hoverable class="my-n-card">
         <n-data-table
           class="h-100% overflow-auto"
           :on-update:page="onUpdatePage"
@@ -34,50 +34,27 @@
           :pagination="pagination"
           :loading="loading"
           :row-key="(row: IForm) => row.menuId"
-          />
+        />
       </n-card>
     </div>
     <!-- 表单弹框层 -->
-    <MenuModal ref="menuModal" @getList="getList" />
+    <MenuModal ref="menuModal" @getMenuList="getMenuList" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { NCheckbox, NButton } from 'naive-ui'
-import type { DataTableColumn } from 'naive-ui'
 import MenuModal from './MenuModal.vue'
-import { ref, h, useTemplateRef, onMounted } from 'vue'
+import { ref, h, useTemplateRef } from 'vue'
 import { getMenuList } from '@/apis/system/menu'
 import { menuToTree } from '@/libs/utils/common'
 import type { IForm } from '@/interfaces/system/menu'
-
-// 加载状态
-const loading = ref<boolean>(false)
+import { useNavTable } from '@/hooks/common/useNavTable'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 // Modal实例
 const menuModal = useTemplateRef<InstanceType<typeof MenuModal>>('menuModal')
-
 // 搜索值
 const searchValue = ref<string>('')
-// 分页配置
-const pagination = ref({
-  itemCount: 200,
-  pageCount: 10,
-  pageSize: 10,
-  pageSizes: [10, 20, 30, 40, 50],
-  page: 1,
-  showSizePicker: true,
-  showQuickJumper: true,
-})
-// 分页更新
-const onUpdatePage = (page: number) => {
-  pagination.value.page = page
-}
-// 分页大小更新
-const onUpdatePageSize = (pageSize: number) => {
-  pagination.value.pageSize = pageSize
-}
-// 表格数据
-const tableData = ref<IForm[]>()
 
 // 表格配置项
 const createCoumns = () => {
@@ -98,6 +75,9 @@ const createCoumns = () => {
       title: '菜单图标',
       key: 'menuIcon',
       resizable: true,
+      render: (row: IForm) => {
+        return h(SvgIcon, { name: row.menuIcon || 'default', size: 18 })
+      },
     },
     {
       title: '排序',
@@ -107,6 +87,36 @@ const createCoumns = () => {
     {
       title: '路由地址',
       key: 'path',
+      resizable: true,
+    },
+    {
+      title: '组件路径',
+      key: 'component',
+      resizable: true,
+    },
+    {
+      title: '组件路径',
+      key: 'component',
+      resizable: true,
+    },
+    {
+      title: '组件路径',
+      key: 'component',
+      resizable: true,
+    },
+    {
+      title: '组件路径',
+      key: 'component',
+      resizable: true,
+    },
+    {
+      title: '组件路径',
+      key: 'component',
+      resizable: true,
+    },
+    {
+      title: '组件路径',
+      key: 'component',
       resizable: true,
     },
     {
@@ -132,7 +142,9 @@ const createCoumns = () => {
     {
       title: '操作',
       key: 'operation',
+      width: 120,
       resizable: true,
+      fixed: 'right',
       render: (row: IForm) => {
         // 返回两个按钮 一个 修改 一个删除
         return h('div', {}, [
@@ -151,31 +163,19 @@ const createCoumns = () => {
     },
   ]
 }
-// 表格列配置
-const columns = ref<DataTableColumn[]>(createCoumns())
-
-// 生命周期 - onMounted
-onMounted(async () => {
-  console.log("🚀 ~ tableData:", tableData)
-  await getList()
-})
-/**
- * @description: 获取菜单列表
- * @return {*}
- */
-const getList = async () => {
-  try {
-    loading.value = true
-    const res = await getMenuList()
-    if (res.code === 200) {
-      loading.value = false
-      tableData.value = menuToTree(res.data as IForm[])
-    }
-  } catch (error) {
-    loading.value = false
-    console.log(error)
-  }
-}
+// 菜单管理表格-hooks
+const { search, tableData, columns, pagination, loading, onUpdatePage, onUpdatePageSize } =
+  useNavTable<IForm>({
+    // API请求函数
+    fetchData: getMenuList,
+    // 表格配置项
+    columns: createCoumns(),
+    // 自动加载数据
+    autoLoad: true,
+    // 数据转换函数
+    transformData: menuToTree,
+  })
+  
 /**
  * @description: 新增菜单
  * @return {*}
@@ -213,7 +213,7 @@ const deleteMenu = (row: IForm) => {
  */
 const searchMenu = async () => {
   try {
-    await getList()
+    await search({ menuName: searchValue.value })
   } catch (error) {
     console.log(error)
   }
