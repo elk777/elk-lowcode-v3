@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-11-13 18:34:22
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-09 17:05:34
+ * @LastEditTime: 2025-12-10 14:44:10
  * @FilePath: /elk-lowcode-v3/src/views/system/menu/index.vue
  * @Description: 菜单管理
 -->
@@ -26,7 +26,8 @@
     <div class="mt-10">
       <n-card hoverable class="my-n-card">
         <n-data-table
-          class="h-100% overflow-auto"
+          flex-height
+          class="h-100%"
           :on-update:page="onUpdatePage"
           :on-update:page-size="onUpdatePageSize"
           :data="tableData"
@@ -34,7 +35,8 @@
           :pagination="pagination"
           :loading="loading"
           :row-key="(row: IForm) => row.menuId"
-        />
+          :scroll-x="totalWidth"
+          />
       </n-card>
     </div>
     <!-- 表单弹框层 -->
@@ -51,13 +53,14 @@ import { menuToTree } from '@/libs/utils/common'
 import type { IForm } from '@/interfaces/system/menu'
 import { useNavTable } from '@/hooks/common/useNavTable'
 import SvgIcon from '@/components/SvgIcon/index.vue'
+import type { DataTableColumns } from 'naive-ui'
 // Modal实例
 const menuModal = useTemplateRef<InstanceType<typeof MenuModal>>('menuModal')
 // 搜索值
 const searchValue = ref<string>('')
 
 // 表格配置项
-const createCoumns = () => {
+const createCoumns = (): DataTableColumns<IForm> => {
   return [
     // {
     //   title: '序号',
@@ -70,11 +73,14 @@ const createCoumns = () => {
       title: '菜单名称',
       key: 'menuName',
       resizable: true,
+      width: 120,
+      fixed: 'left',
     },
     {
       title: '菜单图标',
       key: 'menuIcon',
       resizable: true,
+      width: 80,
       render: (row: IForm) => {
         return h(SvgIcon, { name: row.menuIcon || 'default', size: 18 })
       },
@@ -83,51 +89,25 @@ const createCoumns = () => {
       title: '排序',
       key: 'orderNum',
       resizable: true,
+      width: 70,
     },
     {
       title: '路由地址',
       key: 'path',
       resizable: true,
+      width: 120,
     },
     {
       title: '组件路径',
       key: 'component',
       resizable: true,
-    },
-    {
-      title: '组件路径',
-      key: 'component',
-      resizable: true,
-    },
-    {
-      title: '组件路径',
-      key: 'component',
-      resizable: true,
-    },
-    {
-      title: '组件路径',
-      key: 'component',
-      resizable: true,
-    },
-    {
-      title: '组件路径',
-      key: 'component',
-      resizable: true,
-    },
-    {
-      title: '组件路径',
-      key: 'component',
-      resizable: true,
-    },
-    {
-      title: '组件路径',
-      key: 'component',
-      resizable: true,
+      width: 180,
     },
     {
       title: '是否外链',
       key: 'isFrame',
       resizable: true,
+      width: 80,
       render: (row: IForm) => {
         return h(NCheckbox, {
           checked: row.isFrame === 0,
@@ -138,6 +118,7 @@ const createCoumns = () => {
       title: '菜单描述',
       key: 'remark',
       resizable: true,
+      width: 150,
     },
     {
       title: '操作',
@@ -164,7 +145,7 @@ const createCoumns = () => {
   ]
 }
 // 菜单管理表格-hooks
-const { search, tableData, columns, pagination, loading, onUpdatePage, onUpdatePageSize } =
+const { search, tableData, columns, pagination, loading, onUpdatePage, onUpdatePageSize, totalWidth } =
   useNavTable<IForm>({
     // API请求函数
     fetchData: getMenuList,
@@ -175,7 +156,7 @@ const { search, tableData, columns, pagination, loading, onUpdatePage, onUpdateP
     // 数据转换函数
     transformData: menuToTree,
   })
-  
+
 /**
  * @description: 新增菜单
  * @return {*}

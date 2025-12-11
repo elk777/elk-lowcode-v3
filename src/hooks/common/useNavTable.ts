@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-12-09 14:08:43
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-09 16:11:47
+ * @LastEditTime: 2025-12-10 15:30:15
  * @FilePath: /elk-lowcode-v3/src/hooks/common/useNavTable.ts
  * @Description: 通用表格 hook封装
  */
@@ -109,6 +109,8 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
   const refresh = async () => {
     await loadData()
   }
+  // 遍历columns的width属性，累加宽度
+  const totalWidth = columns.value.reduce((acc, cur) => acc + (cur.width as number || 0), 0)
   //  初始化时加载数据
   onMounted(() => {
     if (options.autoLoad) {
@@ -127,5 +129,6 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
     refresh,
     onUpdatePage,
     onUpdatePageSize,
+    totalWidth
   }
 }

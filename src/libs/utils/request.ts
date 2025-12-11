@@ -3,12 +3,13 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:32:14
  * @LastEditors: elk 
- * @LastEditTime: 2025-11-28 15:56:05
+ * @LastEditTime: 2025-12-11 14:46:38
  * @FilePath: /elk-lowcode-v3/src/libs/utils/request.ts
  */
 import axios from 'axios'
 import { getBasePath } from '@/mocks/utils'
 import { useAuthStore } from '@/stores/auth'
+import { message } from '@/plugins/navi-message'
 
 const request = axios.create({
   baseURL: import.meta.env.VITE_API_URL + getBasePath(),
@@ -36,6 +37,8 @@ request.interceptors.response.use(
     return response.data
   },
   function (error) {
+    // 将错误抛出去给提示
+    message.error(error.message)
     // 响应错误处理逻辑
     return Promise.reject(error)
   },

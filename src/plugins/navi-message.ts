@@ -2,15 +2,15 @@
  * @Author: elk
  * @Date: 2025-11-01 13:06:54
  * @LastEditors: elk 
- * @LastEditTime: 2025-11-08 19:18:12
+ * @LastEditTime: 2025-12-11 14:46:06
  * @FilePath: /elk-lowcode-v3/src/plugins/navi-message.ts
  * @Description: 导航栏消息插件
  */
 import { createDiscreteApi } from 'naive-ui' // 关键：引入离散API工具
 import type { App } from 'vue'
 
-const { message } = createDiscreteApi(['message'])
-const { dialog } = createDiscreteApi(['dialog'])
+export const { message } = createDiscreteApi(['message'])
+export const { dialog } = createDiscreteApi(['dialog'])
 
 export default {
   install(app: App) {
