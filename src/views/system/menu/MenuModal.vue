@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-11-25 15:44:19
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-08 16:40:29
+ * @LastEditTime: 2025-12-12 14:08:24
  * @FilePath: /elk-lowcode-v3/src/views/system/menu/MenuModal.vue
  * @Description: 菜单表单弹框
 -->
@@ -21,12 +21,12 @@
       label-align="left"
       require-mark-placement="right"
       ref="formRef"
-      :model="form"
+      :model="formData"
       :rules="rules"
     >
       <n-form-item label="上级菜单">
         <n-cascader
-          v-model:value="form.menuId"
+          v-model:value="formData.menuId"
           :options="options"
           placeholder="选择上级菜单"
           @update:value="getCheckedData"
@@ -34,19 +34,19 @@
         />
       </n-form-item>
       <n-form-item label="菜单类型" path="menuType">
-        <n-radio-group v-model:value="form.menuType">
+        <n-radio-group v-model:value="formData.menuType">
           <n-radio v-for="song in songs" :key="song.value" :value="song.value">
             {{ song.label }}
           </n-radio>
         </n-radio-group>
       </n-form-item>
       <n-form-item v-if="!showPageA" label="菜单图标" path="menuIcon">
-        <IconSelector class="w-100%" v-model:icon="form.menuIcon" @getIcon="getIcon" />
+        <IconSelector class="w-100%" v-model:icon="formData.menuIcon" @getIcon="getIcon" />
       </n-form-item>
       <n-grid>
         <n-grid-item span="12">
           <n-form-item label="菜单名称" path="menuName">
-            <n-input v-model:value="form.menuName" placeholder="输入菜单名称"></n-input>
+            <n-input v-model:value="formData.menuName" placeholder="输入菜单名称"></n-input>
           </n-form-item>
         </n-grid-item>
         <n-grid-item span="12">
@@ -54,7 +54,7 @@
             <n-input-number
               class="w-100%"
               :min="0"
-              v-model:value="form.orderNum"
+              v-model:value="formData.orderNum"
               placeholder="输入菜单排序"
             />
           </n-form-item>
@@ -63,7 +63,7 @@
       <n-grid>
         <n-grid-item v-if="!showPageA" span="12">
           <n-form-item label="是否外链" path="isFrame">
-            <n-radio-group v-model:value="form.isFrame">
+            <n-radio-group v-model:value="formData.isFrame">
               <n-radio value="0">是</n-radio>
               <n-radio value="1">否</n-radio>
             </n-radio-group>
@@ -71,26 +71,26 @@
         </n-grid-item>
         <n-grid-item v-if="!showPageA" span="12">
           <n-form-item label="路由地址" path="path">
-            <n-input v-model:value="form.path" placeholder="输入路由地址"></n-input>
+            <n-input v-model:value="formData.path" placeholder="输入路由地址"></n-input>
           </n-form-item>
         </n-grid-item>
       </n-grid>
       <n-grid>
-        <n-grid-item v-if="showPageC"  span="12">
+        <n-grid-item v-if="showPageC" span="12">
           <n-form-item label="组件路径" path="component">
-            <n-input v-model:value="form.component" placeholder="输入组件路径"></n-input>
+            <n-input v-model:value="formData.component" placeholder="输入组件路径"></n-input>
           </n-form-item>
         </n-grid-item>
         <n-grid-item v-if="showPageC || showPageA" span="12">
           <n-form-item label="权限标识" path="perms">
-            <n-input v-model:value="form.perms" placeholder="输入权限标识"></n-input>
+            <n-input v-model:value="formData.perms" placeholder="输入权限标识"></n-input>
           </n-form-item>
         </n-grid-item>
       </n-grid>
       <n-grid>
         <n-grid-item v-if="!showPageA" span="12">
           <n-form-item label="显示状态" path="visible">
-            <n-radio-group v-model:value="form.visible">
+            <n-radio-group v-model:value="formData.visible">
               <n-radio value="0">显示</n-radio>
               <n-radio value="1">隐藏</n-radio>
             </n-radio-group>
@@ -98,7 +98,7 @@
         </n-grid-item>
         <n-grid-item v-if="!showPageA" span="12">
           <n-form-item label="菜单状态" path="status">
-            <n-radio-group v-model:value="form.status">
+            <n-radio-group v-model:value="formData.status">
               <n-radio value="1">使用</n-radio>
               <n-radio value="0">停用</n-radio>
             </n-radio-group>
@@ -108,7 +108,7 @@
       <n-grid>
         <n-grid-item v-if="!showPageA" span="12">
           <n-form-item label="是否缓存" path="isCache">
-            <n-radio-group v-model:value="form.isCache">
+            <n-radio-group v-model:value="formData.isCache">
               <n-radio value="0">是</n-radio>
               <n-radio value="1">否</n-radio>
             </n-radio-group>
@@ -118,25 +118,23 @@
       </n-grid>
     </n-form>
     <template #action>
-      <n-button @click="handleCancel">取消</n-button>
-      <n-button type="primary" @click="handleSubmit">确定</n-button>
+      <n-button @click="close">取消</n-button>
+      <n-button type="primary" :loading="loading" @click="submit">确定</n-button>
     </template>
   </n-modal>
 </template>
 <script setup lang="ts" name="MenuModal">
 import { ref, defineExpose, inject, defineEmits, computed } from 'vue'
-import type { FormRules, FormInst } from 'naive-ui'
+import type { FormRules } from 'naive-ui'
 import type { MessageApiInjection } from 'naive-ui/lib/message/src/MessageProvider'
 import type { IForm } from '@/interfaces/system/menu'
 import IconSelector from '@/components/IconSelector/index.vue'
 
+import { useNavForm } from '@/hooks/common/userNavForm'
 import { addMenu as addMenuApi, updateMenu as updateMenuApi } from '@/apis/system/menu'
 
 const emit = defineEmits(['getList'])
 const $message = inject<MessageApiInjection>('$message')!
-const formRef = ref<FormInst>()
-const show = ref<boolean>(false)
-const title = ref<string>('')
 const form = ref<IForm>({})
 const songs = ref([
   { label: '目录', value: 'M' },
@@ -188,6 +186,22 @@ const showPageC = computed(() => {
 const showPageA = computed(() => {
   return form.value.menuType === 'A'
 })
+
+// 表单hooks函数
+const { formData, title, loading, show, formRef, submit, close, reset } = useNavForm({
+  formData: form.value,
+  rules,
+  onSubmit: async (data) => {
+    if (title.value === '新增菜单') {
+      addMenuApi(data)
+    } else if (title.value === '修改菜单') {
+      updateMenuApi(data)
+    }
+  },
+  onReset: () => {
+    resetForm()
+  },
+})
 /**
  * @description: 获取选中的级联数据
  * @return {*}
@@ -200,7 +214,7 @@ const getCheckedData = (value: number) => {
  * @return {*}
  */
 const resetForm = () => {
-  form.value = {
+  const defaultForm = {
     menuId: null,
     parentId: 0,
     menuName: '',
@@ -214,34 +228,8 @@ const resetForm = () => {
     status: '1',
     isCache: '1',
   }
+  form.value = { ...defaultForm }
 }
-/**
- * @description: 关闭表单
- * @return {*}
- */
-const handleCancel = () => {
-  show.value = false
-}
-/**
- * @description: 提交表单
- * @return {*}
- */
-const handleSubmit = () => {
-  console.log('handleSubmit', form.value)
-  formRef.value?.validate((errors) => {
-    if (!errors) {
-      if (title.value === '新增菜单') {
-        addMenu()
-      } else if (title.value === '修改菜单') {
-        updateMenu()
-      }
-      console.log('提交表单')
-    } else {
-      console.log('表单验证失败')
-    }
-  })
-}
-
 /**
  * @description: 新增菜单
  * @return {*}
@@ -288,7 +276,7 @@ const getIcon = (iconParams: string) => {
 defineExpose({
   show,
   title,
-  form,
-  resetForm,
+  formData,
+  reset,
 })
 </script>

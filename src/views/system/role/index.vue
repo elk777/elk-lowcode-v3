@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-11-13 11:02:01
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-11 17:01:11
+ * @LastEditTime: 2025-12-12 14:08:36
  * @FilePath: /elk-lowcode-v3/src/views/system/role/index.vue
 -->
 <template>
@@ -147,6 +147,7 @@ const addRole = () => {
   if (roleModalRef.value) {
     roleModalRef.value.show = true
     roleModalRef.value.title = '新增角色'
+    roleModalRef.value.reset()
   }
 }
 /**

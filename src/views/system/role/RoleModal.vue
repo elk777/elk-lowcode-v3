@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-12-09 16:47:50
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-11 17:00:33
+ * @LastEditTime: 2025-12-12 14:08:08
  * @FilePath: /elk-lowcode-v3/src/views/system/role/RoleModal.vue
  * @Description: 角色管理弹窗
 -->
@@ -124,7 +124,7 @@ const rules = ref<FormRules>({
 const menuTree = ref<IForm[]>([])
 
 // 角色管理弹窗-hooks函数
-const { show, title, formRef, formData, loading, submit, close } = useNavForm<IRole>({
+const { show, title, formRef, formData, loading, submit, close, reset } = useNavForm<IRole>({
   formData: form.value,
   rules: rules.value,
   onSubmit: async (values) => {
@@ -174,6 +174,6 @@ defineExpose({
   show,
   title,
   formData,
-  resetForm
+  reset
 })
 </script>

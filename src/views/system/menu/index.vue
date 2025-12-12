@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-11-13 18:34:22
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-10 14:44:10
+ * @LastEditTime: 2025-12-12 14:08:29
  * @FilePath: /elk-lowcode-v3/src/views/system/menu/index.vue
  * @Description: 菜单管理
 -->
@@ -166,7 +166,7 @@ const addMenu = () => {
   if (menuModal.value) {
     menuModal.value.show = true
     menuModal.value.title = '新增菜单'
-    menuModal.value.resetForm()
+    menuModal.value.reset()
   }
 }
 /**
@@ -177,7 +177,7 @@ const updateMenu = (row: IForm) => {
   if (menuModal.value) {
     menuModal.value.show = true
     menuModal.value.title = '修改菜单'
-    menuModal.value.form = row
+    menuModal.value.formData = row
   }
 }
 /**
