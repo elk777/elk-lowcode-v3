@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-11-28 15:53:55
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-03 15:48:16
+ * @LastEditTime: 2025-12-12 16:22:35
  * @FilePath: /elk-lowcode-v3/src/apis/system/menu.ts
  * @Description: 菜单管理-API集合
  */
@@ -43,6 +43,18 @@ export const updateMenu = (data: IForm): Promise<IResponse> => {
   return request({
     url: '/system/menu/update',
     method: 'put',
+    data,
+  })
+}
+/**
+ * @description: 删除菜单
+ * @param {*} Promise<IResponse>  
+ * @return {*}
+ */
+export const deleteMenu = (data: IForm[]): Promise<IResponse> => {
+  return request({
+    url: '/system/menu/delete',
+    method: 'delete',
     data,
   })
 }
