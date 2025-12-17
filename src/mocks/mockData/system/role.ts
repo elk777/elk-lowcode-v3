@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-12-09 15:39:07
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-11 16:37:57
+ * @LastEditTime: 2025-12-17 13:49:39
  * @FilePath: /elk-lowcode-v3/src/mocks/mockData/system/role.ts
  * @Description: 角色模拟数据
  */
@@ -35,7 +35,7 @@ roleDB.role.create({
   createBy: 'admin',
   updateBy: 'admin',
   remark: '管理员角色',
-  status: '0',
+  status: '1',
   delFlag: '0',
   updatedAt: new Date().toISOString(),
   createdAt: new Date().toISOString(),
@@ -50,7 +50,7 @@ roleDB.role.create({
   createBy: 'admin',
   updateBy: 'admin',
   remark: '普通用户角色',
-  status: '0',
+  status: '1',
   delFlag: '0',
   updatedAt: new Date().toISOString(),
   createdAt: new Date().toISOString(),

@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-12-09 14:08:43
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-10 15:30:15
+ * @LastEditTime: 2025-12-17 09:32:43
  * @FilePath: /elk-lowcode-v3/src/hooks/common/useNavTable.ts
  * @Description: 通用表格 hook封装
  */
@@ -11,7 +11,7 @@ import type { PaginationProps, DataTableColumn } from 'naive-ui'
 import type { IResponse } from '@/interfaces/response'
 // 定义hooks参数接口
 export interface UseNavTableOptions<T> {
-  //  API请求函数
+  //  API请求函数-获取表格数据
   fetchData: (...args: unknown[]) => Promise<IResponse>
   //  表格列配置
   columns: DataTableColumn<T>[]
@@ -19,6 +19,8 @@ export interface UseNavTableOptions<T> {
   pagination?: Partial<PaginationProps>
   //  是否在初始化时加载数据
   autoLoad?: boolean
+  // 删除函数
+  deleteApi?: (data: T[]) => Promise<IResponse>
   //  数据转换函数
   transformData?: (data: T[]) => T[]
 }
@@ -45,11 +47,18 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
   })
   //  数据总数
   const total = ref<number>(0)
+  // 行选中数据
+  const selectedRows = ref<T[]>([])
+  // 删除按钮状态loading
+  const deleteLoading = ref<boolean>(false)
   //  表格配置
   const columns = ref<DataTableColumn<T>[]>(options.columns)
   //  查询参数
   const queryParams = ref<Record<string, unknown>>({})
-  //  加载数据函数
+  /**
+   * @description: 加载数据函数
+   * @return {*}
+   */
   const loadData = async (params?: unknown) => {
     try {
       loading.value = true
@@ -105,12 +114,42 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
     }
     await loadData()
   }
+  /**
+   * @description: 设置选中行数据
+   * @return {*}
+   */
+  const setSelectedRows = (rows: T[]) => {
+    selectedRows.value = rows
+  }
+  /**
+   * @description: 删除选中行数据或传递数据
+   * @return {*}
+   */
+  const deleteSelectedRows = async (data?: T[] | []) => {
+    console.log("🚀 ~ deleteSelectedRows ~ data:", data)
+    console.log('删除选中行数据:', selectedRows.value)
+    try {
+      if (options.deleteApi && (selectedRows.value.length > 0 || (data && data.length > 0))) {
+        deleteLoading.value = true
+        await options.deleteApi(data || selectedRows.value as T[])
+        // 刷新数据
+        await loadData()
+      }
+    } catch (error) {
+      console.error('删除选中行数据失败:', error)
+    } finally {
+      // 清空选中行数据
+      setSelectedRows([])
+      // 重置删除按钮loading状态
+      deleteLoading.value = false
+    }
+  }
   // 刷新数据
   const refresh = async () => {
     await loadData()
   }
   // 遍历columns的width属性，累加宽度
-  const totalWidth = columns.value.reduce((acc, cur) => acc + (cur.width as number || 0), 0)
+  const totalWidth = columns.value.reduce((acc, cur) => acc + ((cur.width as number) || 0), 0)
   //  初始化时加载数据
   onMounted(() => {
     if (options.autoLoad) {
@@ -123,12 +162,15 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
     columns,
     total,
     pagination,
+    totalWidth,
+    deleteLoading,
     setQueryParams,
     resetQueryParams,
     search,
     refresh,
     onUpdatePage,
     onUpdatePageSize,
-    totalWidth
+    setSelectedRows,
+    deleteSelectedRows,
   }
 }

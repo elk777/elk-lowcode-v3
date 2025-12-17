@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-12-09 16:47:50
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-12 14:08:08
+ * @LastEditTime: 2025-12-17 13:48:06
  * @FilePath: /elk-lowcode-v3/src/views/system/role/RoleModal.vue
  * @Description: 角色管理弹窗
 -->
@@ -48,8 +48,8 @@
         <n-grid-item span="12">
           <n-form-item label="角色状态" path="status">
             <n-radio-group v-model:value="formData.status">
-              <n-radio label="1">正常</n-radio>
-              <n-radio label="0">停用</n-radio>
+              <n-radio value="1">正常</n-radio>
+              <n-radio value="0">停用</n-radio>
             </n-radio-group>
           </n-form-item>
         </n-grid-item>

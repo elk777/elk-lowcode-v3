@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-12-09 15:17:19
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-11 17:01:32
+ * @LastEditTime: 2025-12-17 08:58:05
  * @FilePath: /elk-lowcode-v3/src/apis/system/role.ts
  * @Description: 角色接口
  */
@@ -35,9 +35,10 @@ export const updateRole = (data: IRole): Promise<IResponse> => {
   })
 }
 // 删除角色
-export const deleteRole = (roleId: number): Promise<IResponse> => {
+export const deleteRole = (data: IRole[]): Promise<IResponse> => {
   return request({
-    url: `/system/role/${roleId}`,
+    url: `/system/role`,
     method: 'delete',
+    data
   })
 }

@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-11-13 11:02:01
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-12 14:08:36
+ * @LastEditTime: 2025-12-17 13:49:59
  * @FilePath: /elk-lowcode-v3/src/views/system/role/index.vue
 -->
 <template>
@@ -26,6 +26,7 @@
     <div class="mt-10">
       <n-card hoverable class="my-n-card">
         <n-data-table
+          flex-height
           class="h-100% overflow-auto"
           :on-update:page="onUpdatePage"
           :on-update:page-size="onUpdatePageSize"
@@ -34,6 +35,8 @@
           :pagination="pagination"
           :loading="loading"
           :row-key="(row: IRole) => row.roleId"
+          @update:checked-row-keys="handleCheck"
+          :scroll-x="totalWidth"
         />
       </n-card>
     </div>
@@ -42,17 +45,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, h, useTemplateRef } from 'vue'
+import { ref, h, useTemplateRef, inject } from 'vue'
 import { useNavTable } from '@/hooks/common/useNavTable'
-import { getRoleList } from '@/apis/system/role'
-import { NButton } from 'naive-ui'
+import { getRoleList, deleteRole } from '@/apis/system/role'
+import { NButton, NTag } from 'naive-ui'
 import RoleModal from './RoleModal.vue'
-import type { DataTableColumns } from 'naive-ui'
+import type { DataTableColumns, DataTableRowKey } from 'naive-ui'
+import type { DialogApiInjection } from 'naive-ui/lib/dialog/src/DialogProvider'
 import type { IRole } from '@/interfaces/system/role'
 
 const searchValue = ref<string>('')
 const createRoleColumns = (): DataTableColumns<IRole> => {
   return [
+    {
+      type: 'selection',
+      width: 60,
+    },
     {
       title: '角色名称',
       key: 'roleName',
@@ -76,6 +84,12 @@ const createRoleColumns = (): DataTableColumns<IRole> => {
       key: 'status',
       resizable: true,
       width: 100,
+      render: (row: IRole) => {
+        return h(NTag,{
+          type: row.status === '1' ? 'success' : 'default',
+          bordered: false
+        },row.status === '1' ? '正常' : '停用')
+      },
     },
     {
       title: '角色描述',
@@ -121,24 +135,47 @@ const createRoleColumns = (): DataTableColumns<IRole> => {
     },
   ]
 }
+
+const dialog = inject<DialogApiInjection>('$dialog')
 // Modal实例
 const roleModalRef = useTemplateRef<InstanceType<typeof RoleModal>>('roleModalRef')
 // 角色管理表格-hooks
-const { search, tableData, columns, pagination, loading, onUpdatePage, onUpdatePageSize } =
-  useNavTable<IRole>({
-    // API请求函数
-    fetchData: getRoleList,
-    // 表格配置项
-    columns: createRoleColumns(),
-    // 自动加载数据
-    autoLoad: true,
-  })
+const {
+  tableData,
+  columns,
+  pagination,
+  loading,
+  deleteLoading,
+  totalWidth,
+  search,
+  onUpdatePage,
+  onUpdatePageSize,
+  setSelectedRows,
+  deleteSelectedRows,
+} = useNavTable<IRole>({
+  // API请求函数
+  fetchData: getRoleList,
+  // 表格配置项
+  columns: createRoleColumns(),
+  // 自动加载数据
+  autoLoad: true,
+  // 删除API函数
+  deleteApi: deleteRole,
+})
 // 处理查询事件
 const handleSearch = () => {
   // 调用搜索函数
   search({ roleName: searchValue.value })
 }
 
+/**
+ * @description: 处理选择事件
+ * @param {DataTableRowKey[]} rows 选中的对象数组
+ * @return {*}
+ */
+const handleCheck = (rowKeys: DataTableRowKey[], rows: IRole[]) => {
+  setSelectedRows(rows)
+}
 /**
  * @description: 新增角色
  * @return {*}
@@ -169,11 +206,17 @@ const handleEdit = (row: IRole) => {
  * @return {*}
  */
 const handleDelete = (row: IRole) => {
-  console.log('🚀 ~ handleDelete ~ row:', row)
   // 删除角色
-  // deleteRole(row.roleId).then(() => {
-  //   // 删除成功后刷新表格数据
-  //   search({ roleName: searchValue.value })
-  // })
+  dialog?.warning({
+    title: '确认删除',
+    content: `确定删除角色 ${row.roleName} 吗？`,
+    showIcon: false,
+    positiveText: '确定',
+    negativeText: '取消',
+    loading: deleteLoading.value,
+    onPositiveClick: () => {
+      deleteSelectedRows([row])
+    },
+  })
 }
 </script>

@@ -2,7 +2,7 @@
  * @Author: elk
  * @Date: 2025-11-13 18:34:22
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-12 14:08:29
+ * @LastEditTime: 2025-12-16 16:56:00
  * @FilePath: /elk-lowcode-v3/src/views/system/menu/index.vue
  * @Description: 菜单管理
 -->
@@ -36,7 +36,7 @@
           :loading="loading"
           :row-key="(row: IForm) => row.menuId"
           :scroll-x="totalWidth"
-          />
+        />
       </n-card>
     </div>
     <!-- 表单弹框层 -->
@@ -47,17 +47,20 @@
 <script setup lang="ts">
 import { NCheckbox, NButton } from 'naive-ui'
 import MenuModal from './MenuModal.vue'
-import { ref, h, useTemplateRef } from 'vue'
-import { getMenuList } from '@/apis/system/menu'
+import { ref, h, useTemplateRef, inject } from 'vue'
+import { getMenuList, deleteMenu as deleteMenuApi } from '@/apis/system/menu'
 import { menuToTree } from '@/libs/utils/common'
 import type { IForm } from '@/interfaces/system/menu'
 import { useNavTable } from '@/hooks/common/useNavTable'
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import type { DataTableColumns } from 'naive-ui'
+import type { DialogApiInjection } from 'naive-ui/lib/dialog/src/DialogProvider'
 // Modal实例
 const menuModal = useTemplateRef<InstanceType<typeof MenuModal>>('menuModal')
 // 搜索值
 const searchValue = ref<string>('')
+// 使用naive-ui的dialog组件
+const dialog = inject<DialogApiInjection>('$dialog')
 
 // 表格配置项
 const createCoumns = (): DataTableColumns<IForm> => {
@@ -136,7 +139,12 @@ const createCoumns = (): DataTableColumns<IForm> => {
           ),
           h(
             NButton,
-            { type: 'error', size: 'small', quaternary: true, onClick: () => deleteMenu(row) },
+            {
+              type: 'error',
+              size: 'small',
+              quaternary: true,
+              onClick: () => deleteMenu(row),
+            },
             { default: () => '删除' },
           ),
         ])
@@ -145,17 +153,29 @@ const createCoumns = (): DataTableColumns<IForm> => {
   ]
 }
 // 菜单管理表格-hooks
-const { search, tableData, columns, pagination, loading, onUpdatePage, onUpdatePageSize, totalWidth } =
-  useNavTable<IForm>({
-    // API请求函数
-    fetchData: getMenuList,
-    // 表格配置项
-    columns: createCoumns(),
-    // 自动加载数据
-    autoLoad: true,
-    // 数据转换函数
-    transformData: menuToTree,
-  })
+const {
+  search,
+  tableData,
+  columns,
+  pagination,
+  totalWidth,
+  loading,
+  deleteLoading,
+  onUpdatePage,
+  onUpdatePageSize,
+  deleteSelectedRows,
+} = useNavTable<IForm>({
+  // API请求函数
+  fetchData: getMenuList,
+  // 表格配置项
+  columns: createCoumns(),
+  // 自动加载数据
+  autoLoad: true,
+  // 删除方法函数
+  deleteApi: deleteMenuApi,
+  // 数据转换函数
+  transformData: menuToTree,
+})
 
 /**
  * @description: 新增菜单
@@ -185,7 +205,18 @@ const updateMenu = (row: IForm) => {
  * @return {*}
  */
 const deleteMenu = (row: IForm) => {
-  console.log('🚀 ~ deleteMenu ~ row:', row)
+  // 确认删除
+  dialog?.warning({
+    title: '确认删除',
+    content: `确定删除菜单 ${row.menuName} 吗？`,
+    showIcon: false,
+    positiveText: '确定',
+    negativeText: '取消',
+    loading: deleteLoading.value,
+    onPositiveClick: () => {
+      deleteSelectedRows([row])
+    },
+  })
 }
 
 /**
