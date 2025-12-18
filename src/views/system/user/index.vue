@@ -1,26 +1,26 @@
 <!--
- * @Description: 角色管理
- * @Autor: lyf
- * @Date: 2025-11-13 11:02:01
+ * @Author: elk
+ * @Date: 2025-12-17 14:22:07
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-18 15:10:21
- * @FilePath: /elk-lowcode-v3/src/views/system/role/index.vue
+ * @LastEditTime: 2025-12-18 15:08:28
+ * @FilePath: /elk-lowcode-v3/src/views/system/user/index.vue
+ * @Description: 用户管理页面
 -->
 <template>
   <div class="main-container">
-    <!-- 搜索 + 按钮层 -->
+    <!-- 搜索框和按钮 -->
     <div class="flex items-center">
       <!-- 搜索层 -->
       <div class="flex">
         <n-input
           style="width: 150px; margin-right: 10px"
-          placeholder="请输入角色名称"
+          placeholder="请输入用户名"
           v-model:value="searchValue"
         />
         <!-- 按钮层 -->
         <n-button type="primary" @click="handleSearch">查询</n-button>
       </div>
-      <n-button class="ml-10" type="primary" @click="addRole">新增</n-button>
+      <n-button class="ml-10" type="primary" @click="addUser">新增</n-button>
     </div>
     <!-- 列表层 使用card 和table 组合-->
     <div class="mt-10">
@@ -34,57 +34,70 @@
           :columns="columns"
           :pagination="pagination"
           :loading="loading"
-          :row-key="(row: IRole) => row.roleId"
+          :row-key="(row: IUser) => row.userId"
           @update:checked-row-keys="setSelectedRows"
           :scroll-x="totalWidth"
         />
       </n-card>
     </div>
-    <RoleModal ref="roleModalRef" />
+    <!-- 用户管理弹窗 -->
+    <UserModal ref="userModalRef" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, h, useTemplateRef, inject } from 'vue'
-import { useNavTable } from '@/hooks/common/useNavTable'
-import { getRoleList, deleteRole } from '@/apis/system/role'
 import { NButton, NTag } from 'naive-ui'
-import RoleModal from './RoleModal.vue'
 import type { DataTableColumns } from 'naive-ui'
+import type { IUser } from '@/interfaces/system/user'
 import type { DialogApiInjection } from 'naive-ui/lib/dialog/src/DialogProvider'
-import type { IRole } from '@/interfaces/system/role'
+
+import { useNavTable } from '@/hooks/common/useNavTable'
+import { getUserList, deleteUser } from '@/apis/system/user'
+
+import UserModal from './UserModal.vue'
 
 const searchValue = ref<string>('')
-const createRoleColumns = (): DataTableColumns<IRole> => {
+const dialog = inject<DialogApiInjection>('$dialog')
+// modal 弹窗引用
+const userModalRef = useTemplateRef<InstanceType<typeof UserModal>>('userModalRef')
+const createUserColumns = (): DataTableColumns<IUser> => {
   return [
     {
       type: 'selection',
+      disabled: (row: IUser) => row.userName === 'admin',
       width: 60,
     },
     {
-      title: '角色名称',
-      key: 'roleName',
+      title: '用户名称',
+      key: 'userName',
       resizable: true,
       width: 120,
     },
     {
-      title: '角色标识',
-      key: 'roleKey',
+      title: '用户昵称',
+      key: 'nickName',
       resizable: true,
       width: 120,
     },
     {
-      title: '排序',
-      key: 'orderNum',
+      title: '关联角色',
+      key: 'roles',
       resizable: true,
-      width: 70,
+      width: 120,
     },
     {
-      title: '角色状态',
+      title: '手机号',
+      key: 'phone',
+      resizable: true,
+      width: 120,
+    },
+    {
+      title: '用户状态',
       key: 'status',
       resizable: true,
-      width: 100,
-      render: (row: IRole) => {
+      width: 120,
+      render: (row: IUser) => {
         return h(
           NTag,
           {
@@ -98,19 +111,18 @@ const createRoleColumns = (): DataTableColumns<IRole> => {
       },
     },
     {
-      title: '角色描述',
+      title: '用户描述',
       key: 'remark',
       resizable: true,
       width: 150,
     },
     {
       title: '操作',
-      key: 'operation',
-      width: 120,
+      key: 'action',
       resizable: true,
+      width: 120,
       fixed: 'right',
-      render: (row: IRole) => {
-        // 返回两个按钮 一个 修改 一个删除
+      render: (row: IUser) => {
         return h('div', {}, [
           h(
             NButton,
@@ -118,34 +130,28 @@ const createRoleColumns = (): DataTableColumns<IRole> => {
               type: 'primary',
               size: 'small',
               quaternary: true,
+              disabled: row.userName === 'admin',
               onClick: () => handleEdit(row),
             },
-            {
-              default: () => '修改',
-            },
+            { default: () => '修改' },
           ),
           h(
             NButton,
             {
               type: 'error',
               size: 'small',
+              disabled: row.userName === 'admin',
               quaternary: true,
               onClick: () => handleDelete(row),
             },
-            {
-              default: () => '删除',
-            },
+            { default: () => '删除' },
           ),
         ])
       },
     },
   ]
 }
-
-const dialog = inject<DialogApiInjection>('$dialog')
-// Modal实例
-const roleModalRef = useTemplateRef<InstanceType<typeof RoleModal>>('roleModalRef')
-// 角色管理表格-hooks
+// 用户管理表格hooks函数
 const {
   tableData,
   columns,
@@ -158,62 +164,61 @@ const {
   onUpdatePageSize,
   setSelectedRows,
   deleteSelectedRows,
-} = useNavTable<IRole>({
-  // API请求函数
-  fetchData: getRoleList,
-  // 表格配置项
-  columns: createRoleColumns(),
-  // 自动加载数据
+} = useNavTable({
+  fetchData: getUserList,
+  columns: createUserColumns(),
   autoLoad: true,
-  // 删除API函数
-  deleteApi: deleteRole,
+  deleteApi: deleteUser,
 })
+
 // 处理查询事件
 const handleSearch = () => {
   // 调用搜索函数
   search({ roleName: searchValue.value })
 }
 /**
- * @description: 新增角色
+ * @description: 新增用户
  * @return {*}
  */
-const addRole = () => {
-  if (roleModalRef.value) {
-    roleModalRef.value.show = true
-    roleModalRef.value.title = '新增角色'
-    roleModalRef.value.reset()
+const addUser = () => {
+  // 调用新增用户弹窗函数
+  if (userModalRef.value) {
+    userModalRef.value.show = true
+    userModalRef.value.title = '新增用户'
   }
 }
 /**
- * @description: 修改角色
- * @param {IRole} row 角色对象
+ * @description: 编辑用户
+ * @param {IUser} row 用户对象
  * @return {*}
  */
-// 处理编辑事件
-const handleEdit = (row: IRole) => {
-  if (roleModalRef.value) {
-    roleModalRef.value.show = true
-    roleModalRef.value.title = '修改角色'
-    roleModalRef.value.formData = { ...row }
+const handleEdit = (row: IUser) => {
+  // 调用编辑用户弹窗函数
+  if (userModalRef.value) {
+    userModalRef.value.show = true
+    userModalRef.value.title = '编辑用户'
+    userModalRef.value.formData = row
   }
 }
 /**
- * @description: 处理删除事件
- * @param {IRole} row 角色对象
+ * @description: 删除用户
+ * @param {IUser} row 用户对象
  * @return {*}
  */
-const handleDelete = (row: IRole) => {
-  // 删除角色
+const handleDelete = (row: IUser) => {
+  // 调用删除用户弹窗函数
   dialog?.warning({
-    title: '确认删除',
-    content: `确定删除角色 ${row.roleName} 吗？`,
+    title: '删除用户',
+    content: `确定删除用户 ${row.userName} 吗？`,
     showIcon: false,
     positiveText: '确定',
     negativeText: '取消',
     loading: deleteLoading.value,
-    onPositiveClick: () => {
-      deleteSelectedRows([row])
+    onPositiveClick: async () => {
+      await deleteSelectedRows([row])
     },
   })
 }
 </script>
+
+<style scoped></style>

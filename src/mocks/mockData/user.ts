@@ -2,9 +2,9 @@
  * @Description: 用户数据mock
  * @Autor: lyf
  * @Date: 2025-07-07 16:09:50
- * @LastEditors: lyf
- * @LastEditTime: 2025-11-14 17:01:20
- * @FilePath: \v3-admin-lowcode\src\mocks\mockData\user.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-12-17 16:21:37
+ * @FilePath: /elk-lowcode-v3/src/mocks/mockData/user.ts
  */
 
 import { factory, primaryKey } from '@mswjs/data'
@@ -13,6 +13,7 @@ export const userDB = factory({
   user: {
     userId: primaryKey(String),
     deptId: String,
+    deptIds: Array,
     userName: String,
     nickName: String,
     email: String,
@@ -28,6 +29,7 @@ export const userDB = factory({
     createdAt: Date,
     avatar: String,
     roles: Array,
+    depts: Array,
   },
   router: {
     id: primaryKey(String),
@@ -48,7 +50,7 @@ userDB.user.create({
   userName: 'admin',
   nickName: '系统管理员',
   email: '123@qq.com',
-  phone: '',
+  phone: '13800000000',
   sex: '0',
   avatar: '',
   status: '1',
@@ -59,7 +61,7 @@ userDB.user.create({
   createdAt: '2024-07-21 13:28:33',
   updateBy: '',
   updatedAt: '',
-  roles: ['admin'],
+  roles: ['admin']
 })
 
 userDB.user.create({
@@ -68,7 +70,7 @@ userDB.user.create({
   userName: 'test',
   nickName: '测试人员',
   email: '456@qq.com',
-  phone: '',
+  phone: '22132456789',
   sex: '1',
   avatar: '',
   status: '1',
@@ -115,6 +117,18 @@ userDB.router.create({
         link: null,
       },
       component: 'system/role/index',
+    },
+    {
+      id: '2-3',
+      name: 'user',
+      path: '/system/user/index',
+      meta: {
+        title: '用户管理',
+        icon: 'user',
+        noCache: false,
+        link: null,
+      },
+      component: 'system/user/index',
     },
   ],
 })

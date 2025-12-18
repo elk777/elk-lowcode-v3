@@ -2,12 +2,12 @@
  * @Author: elk
  * @Date: 2025-12-09 14:08:43
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-17 09:32:43
+ * @LastEditTime: 2025-12-18 15:11:01
  * @FilePath: /elk-lowcode-v3/src/hooks/common/useNavTable.ts
  * @Description: 通用表格 hook封装
  */
 import { ref, onMounted } from 'vue'
-import type { PaginationProps, DataTableColumn } from 'naive-ui'
+import type { PaginationProps, DataTableColumn, DataTableRowKey } from 'naive-ui'
 import type { IResponse } from '@/interfaces/response'
 // 定义hooks参数接口
 export interface UseNavTableOptions<T> {
@@ -118,7 +118,7 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
    * @description: 设置选中行数据
    * @return {*}
    */
-  const setSelectedRows = (rows: T[]) => {
+  const setSelectedRows = (rowskeys: DataTableRowKey[],rows: T[]) => {
     selectedRows.value = rows
   }
   /**
@@ -126,8 +126,6 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
    * @return {*}
    */
   const deleteSelectedRows = async (data?: T[] | []) => {
-    console.log("🚀 ~ deleteSelectedRows ~ data:", data)
-    console.log('删除选中行数据:', selectedRows.value)
     try {
       if (options.deleteApi && (selectedRows.value.length > 0 || (data && data.length > 0))) {
         deleteLoading.value = true
@@ -139,7 +137,7 @@ export function useNavTable<T>(options: UseNavTableOptions<T>) {
       console.error('删除选中行数据失败:', error)
     } finally {
       // 清空选中行数据
-      setSelectedRows([])
+      setSelectedRows([], [])
       // 重置删除按钮loading状态
       deleteLoading.value = false
     }

@@ -2,13 +2,13 @@
  * @Author: elk
  * @Date: 2025-12-09 15:33:43
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-09 15:43:59
+ * @LastEditTime: 2025-12-17 16:15:33
  * @FilePath: /elk-lowcode-v3/src/mocks/handlers/system/role.ts
  * @Description: 角色接口模拟数据
  */
 import { http } from 'msw'
 import { getMockUrl, setResponse } from '@/mocks/utils'
-import { roleDB } from '@/mocks/mockData/system/role'
+import { roleDB } from '@/mocks/mockData/index'
 
 export const roles = [
   // 获取角色列表

@@ -2,16 +2,16 @@
  * @Description 请求拦截器配置
  * @Autor: lyf
  * @Date: 2025-07-07 15:56:21
- * @LastEditors: lyf
- * @LastEditTime: 2025-10-29 16:39:19
- * @FilePath: \v3-admin-lowcode\src\mocks\handlers\user.ts
+ * @LastEditors: elk 
+ * @LastEditTime: 2025-12-17 16:17:39
+ * @FilePath: /elk-lowcode-v3/src/mocks/handlers/user.ts
  */
 import { http } from 'msw'
 import { userDB } from '../mockData/index'
 import { getMockUrl, setResponse } from '../utils'
 
 export const users = [
-  http.get(getMockUrl('/user'), ({}) => {
+  http.get(getMockUrl('/system/user/list'), ({}) => {
     // 生成响应数据
     const data = userDB.user.getAll()
     return setResponse(200, data, '获取用户信息成功')
