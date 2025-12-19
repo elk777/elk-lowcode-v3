@@ -17,6 +17,7 @@ declare module 'vue' {
     NCard: typeof import('naive-ui')['NCard']
     NCascader: typeof import('naive-ui')['NCascader']
     NDataTable: typeof import('naive-ui')['NDataTable']
+    NEmpty: typeof import('naive-ui')['NEmpty']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
     NGrid: typeof import('naive-ui')['NGrid']
@@ -38,6 +39,7 @@ declare module 'vue' {
     NTree: typeof import('naive-ui')['NTree']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchPanel: typeof import('./src/components/SearchPanel/index.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
   }
 }

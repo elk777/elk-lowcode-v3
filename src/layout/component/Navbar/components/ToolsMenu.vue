@@ -3,20 +3,14 @@
  * @Autor: lyf
  * @Date: 2025-11-07 14:30:30
  * @LastEditors: elk 
- * @LastEditTime: 2025-11-09 19:00:18
+ * @LastEditTime: 2025-12-19 16:24:06
  * @FilePath: /elk-lowcode-v3/src/layout/component/Navbar/components/ToolsMenu.vue
 -->
 <template>
   <div class="flex items-center">
     <!-- 搜索框 -->
     <div class="w-100 mr-3">
-      <n-input placeholder="搜索" round>
-        <template #prefix>
-          <n-icon>
-            <SearchOutline />
-          </n-icon>
-        </template>
-      </n-input>
+      <SearchPanel />
     </div>
     <!-- 配置 -->
     <div class="mr-3">
@@ -66,7 +60,7 @@
 
 <script setup lang="ts">
 import { ref, inject } from 'vue'
-import { NInput, NIcon, NButton, NDropdown, NAvatar } from 'naive-ui'
+import { NIcon, NButton, NDropdown, NAvatar } from 'naive-ui'
 import {
   SearchOutline,
   SunnyOutline,
@@ -77,6 +71,7 @@ import {
   SettingsOutline,
 } from '@/libs/utils/icons'
 import { useAuthStore } from '@/stores/auth'
+import SearchPanel from '@/components/SearchPanel/index.vue'
 const message = inject('$message')
 const dialog = inject('$dialog')
 const options = ref([
