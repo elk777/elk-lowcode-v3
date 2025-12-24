@@ -3,7 +3,7 @@
  * @Autor: elk
  * @Date: 2025-12-19 10:30:00
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-19 17:05:18
+ * @LastEditTime: 2025-12-20 21:47:04
  * @FilePath: /elk-lowcode-v3/src/components/SearchPanel/index.vue
 -->
 <template>
@@ -166,21 +166,6 @@ const handleKeyDown = (direction: 'up' | 'down') => {
   // 滚动到当前选中项
   nextTick(() => {
     const selectedItem = resultItemsRef.value[selectedIndex.value]
-    // if (selectedItem && searchResultsRef.value) {
-    //   // 获取滚动容器
-    //   const scrollContainer = searchResultsRef.value.$el.querySelector('.n-scrollbar-content')
-    //   if (scrollContainer) {
-    //     // 计算滚动位置
-    //     const itemTop = selectedItem.offsetTop
-    //     const containerHeight = scrollContainer.clientHeight
-    //     const itemHeight = selectedItem.clientHeight
-    //     // 执行滚动
-    //     scrollContainer.scrollTo({
-    //       top: Math.max(0, itemTop - containerHeight / 2 + itemHeight / 2),
-    //       behavior: 'smooth',
-    //     })
-    //   }
-    // }
     if (selectedItem) {
       selectedItem.scrollIntoView({
         behavior: 'smooth',

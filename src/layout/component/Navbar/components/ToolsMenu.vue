@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-11-07 14:30:30
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-19 16:24:06
+ * @LastEditTime: 2025-12-20 21:53:12
  * @FilePath: /elk-lowcode-v3/src/layout/component/Navbar/components/ToolsMenu.vue
 -->
 <template>
@@ -30,9 +30,12 @@
     </div>
     <!-- 全屏模式 -->
     <div class="mr-3">
-      <n-button quaternary circle>
+      <n-button quaternary circle @click="handleFullscreen">
         <template #icon>
-          <n-icon :size="20"><FullScreenMaximize24Filled /></n-icon>
+          <n-icon :size="20">
+            <FullScreenMaximize24Filled v-if="!isFullscreen" />
+            <FullScreenMinimize24Regular v-else />
+          </n-icon>
         </template>
       </n-button>
     </div>
@@ -74,6 +77,7 @@ import { useAuthStore } from '@/stores/auth'
 import SearchPanel from '@/components/SearchPanel/index.vue'
 const message = inject('$message')
 const dialog = inject('$dialog')
+const isFullscreen = ref(false)
 const options = ref([
   {
     label: '个人中心',
@@ -107,6 +111,26 @@ const handleSelect = (key: string) => {
         message.success('登出成功')
       },
     })
+  }
+}
+
+/**
+ * @description: 处理全屏切换事件
+ * @return {*}
+ */
+const handleFullscreen = () => {
+  // 处理全屏切换事件-需要检测ESC键退出全屏
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      isFullscreen.value = false
+    }
+  })
+  if (document.fullscreenElement) {
+    document.exitFullscreen()
+    isFullscreen.value = false
+  } else {
+    document.documentElement.requestFullscreen()
+    isFullscreen.value = true
   }
 }
 </script>
