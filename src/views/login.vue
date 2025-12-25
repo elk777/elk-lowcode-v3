@@ -3,19 +3,19 @@
  * @Autor: lyf
  * @Date: 2025-06-19 14:14:50
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-05 14:48:21
+ * @LastEditTime: 2025-12-25 10:49:04
  * @FilePath: /elk-lowcode-v3/src/views/login.vue
 -->
 <template>
   <div
-    class="flex justify-center items-center h-screen w-full bg-gradient-to-br from-[#f5f7fa] to-[#e4edf5] p-0 m-0 overflow-hidden"
+    class="flex justify-center items-center h-screen w-full bg-gradient-to-br  p-0 m-0 overflow-hidden"
   >
     <div
-      class="flex w-[85%] min-w-[1100px] max-w-[1500px] h-[75vh] min-h-[580px] max-h-[800px] bg-white rounded-2xl shadow-lg overflow-hidden relative"
+      class="flex w-[85%] min-w-[1100px] max-w-[1500px] h-[75vh] min-h-[580px] max-h-[800px] rounded-2xl shadow-lg overflow-hidden relative"
     >
       <!-- 左侧内容区 -->
       <div
-        class="flex-[1.3] bg-gradient-to-br from-[#4e73df] to-[#5e83e0] p-[50px] flex flex-col justify-center items-center text-white text-center relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('../assets/logo.svg')] before:bg-no-repeat before:bg-center before:bg-[length:300px] before:opacity-5 before:z-0"
+        class="flex-[1.3] bg-gradient-to-br from-[#4e73df] to-[#5e83e0] p-[50px] flex flex-col justify-center items-center text-center relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[url('../assets/logo.svg')] before:bg-no-repeat before:bg-center before:bg-[length:300px] before:opacity-5 before:z-0"
       >
         <h1 class="text-[42px] font-bold mb-6 relative z-1 drop-shadow-md">V3 Admin Lowcode</h1>
         <p class="text-16 opacity-90 mb-[50px] leading-[1.7] max-w-[550px] relative z-1">
@@ -31,7 +31,7 @@
       </div>
 
       <!-- 右侧登录区 -->
-      <div class="w-[460px] p-[60px_50px] flex flex-col justify-center bg-white">
+      <div class="w-[460px] p-[60px_50px] flex flex-col justify-center">
         <div class="flex flex-col items-center mb-[45px]">
           <img src="../assets/logo.svg" alt="Logo" class="w-50 h-50 mb-4" />
           <h2 class="text-20 font-semibold text-[#333] m-0">V3 Admin</h2>

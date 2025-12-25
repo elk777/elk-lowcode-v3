@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-11-11 14:47:31
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-18 16:52:11
+ * @LastEditTime: 2025-12-24 16:57:37
  * @FilePath: /elk-lowcode-v3/src/layout/component/TagsView/index.vue
 -->
 <template>
@@ -40,7 +40,6 @@
       :y="menuPosition.y"
       style="padding: 2px; width: 120px"
     >
-      <!-- <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] rounded-md"> -->
       <div
         class="flex justify-center p-10 px-5 flex items-center cursor-pointer text-14 transition-all hover:bg-[rgba(0,0,0,0.05)]"
         @click="refreshCurrent"

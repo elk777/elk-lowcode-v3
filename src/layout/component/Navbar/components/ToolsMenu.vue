@@ -3,7 +3,7 @@
  * @Autor: lyf
  * @Date: 2025-11-07 14:30:30
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-20 21:53:12
+ * @LastEditTime: 2025-12-24 16:53:42
  * @FilePath: /elk-lowcode-v3/src/layout/component/Navbar/components/ToolsMenu.vue
 -->
 <template>
@@ -22,9 +22,12 @@
     </div>
     <!-- 明亮/暗色切换 -->
     <div class="mr-3">
-      <n-button quaternary circle>
+      <n-button quaternary circle @click="handleDarkMode">
         <template #icon>
-          <n-icon :size="20"><SunnyOutline /></n-icon>
+          <n-icon :size="20">
+            <SunnyOutline v-if="!appStore.isDarkMode" />
+            <Moon v-else />
+          </n-icon>
         </template>
       </n-button>
     </div>
@@ -75,9 +78,11 @@ import {
 } from '@/libs/utils/icons'
 import { useAuthStore } from '@/stores/auth'
 import SearchPanel from '@/components/SearchPanel/index.vue'
+import { useAppStore } from '@/stores/app'
 const message = inject('$message')
 const dialog = inject('$dialog')
 const isFullscreen = ref(false)
+const appStore = useAppStore()
 const options = ref([
   {
     label: '个人中心',
@@ -132,6 +137,14 @@ const handleFullscreen = () => {
     document.documentElement.requestFullscreen()
     isFullscreen.value = true
   }
+}
+
+/**
+ * @description: 处理暗黑模式切换事件
+ * @return {*}
+ */
+const handleDarkMode = () => {
+  appStore.toggleDarkMode()
 }
 </script>
 

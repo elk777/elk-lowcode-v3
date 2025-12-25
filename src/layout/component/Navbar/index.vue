@@ -3,13 +3,13 @@
  * @Autor: lyf
  * @Date: 2025-11-07 14:18:57
  * @LastEditors: elk 
- * @LastEditTime: 2025-12-04 15:58:49
+ * @LastEditTime: 2025-12-24 16:57:08
  * @FilePath: /elk-lowcode-v3/src/layout/component/Navbar/index.vue
 -->
 
 <template>
   <div
-    class="h-50 flex items-center justify-between bg-white shadow-[0px_1px_4px_rgba(0,21,41,0.08)]"
+    class="h-50 flex items-center justify-between shadow-[0px_1px_4px_rgba(0,21,41,0.08)]"
   >
     <!-- 面包屑 -->
     <Breadcrumb />
